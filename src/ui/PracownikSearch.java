@@ -85,6 +85,7 @@ public class PracownikSearch extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		setLocationRelativeTo(null);
 		
 		JButton btnSzukaj = new JButton("Szukaj");
 		btnSzukaj.setBounds(1089, 34, 98, 38);
@@ -217,6 +218,9 @@ public class PracownikSearch extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				//stworz okienko
 				PracownikDialog okienko = new PracownikDialog(pracownikDao, PracownikSearch.this);
+				okienko.setLocationRelativeTo(null);
+				okienko.setResizable(false);
+				
 				
 				//pokaz okienko
 				okienko.setVisible(true);
@@ -428,9 +432,11 @@ public class PracownikSearch extends JFrame {
 				
 				//stworz okienko
 				PracownikDialog okienko = new PracownikDialog(pracownikDao, PracownikSearch.this, tempPracownik, true);
-				
+				okienko.setLocationRelativeTo(null);
+				okienko.setResizable(false);
 				//pokaz okienko
 				okienko.setVisible(true);
+				
 				
 			}
 		});

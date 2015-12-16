@@ -320,7 +320,6 @@ public class PracownikSearch extends JFrame {
 	        		miejscowoscTextField.setText(null);
 	        		miejscowoscTextField.setForeground(Color.BLACK);
 			     }
-	            
 	        }
 
 			public void focusLost(FocusEvent e) {

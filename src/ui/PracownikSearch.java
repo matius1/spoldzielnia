@@ -1,10 +1,12 @@
 package ui;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.Caret;
 
 import core.Pracownik;
 import dao.PracownikDAO;
@@ -18,6 +20,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.GridBagLayout;
@@ -83,21 +87,62 @@ public class PracownikSearch extends JFrame {
 		setContentPane(contentPane);
 		
 		JButton btnSzukaj = new JButton("Szukaj");
-		btnSzukaj.setBounds(1089, 34, 98, 33);
+		btnSzukaj.setBounds(1089, 34, 98, 38);
 		btnSzukaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 		
 				try{
 					//pobierz nazwisko z nazwiskoTextField
+					// sprawdzanie czy nie ma tam tekstu z ficzera
 					String nazwisko = nazwiskoTextField.getText();
+					if(nazwiskoTextField.getText().equals("Nazwisko")){
+						
+						nazwisko= "";
+					}
+					
 					String stanowisko = stanowiskoTextField.getText();
+					if(stanowiskoTextField.getText().equals("Stanowisko")){
+						
+						stanowisko = "";
+					}
+					
 					String imie = imieTextField.getText();
+					if(imieTextField.getText().equals("Imie")){
+						
+						imie = "";
+					}
+					
 					String ulica = ulicaTextField.getText();
+					if(ulicaTextField.getText().equals("Ulica")){
+						
+						ulica = "";
+					}
+					
 					String miejscowosc = miejscowoscTextField.getText();
+					if(miejscowoscTextField.getText().equals("Miejscowosc")){
+						
+						miejscowosc = "";
+					}
+					
 					String pesel = peselTextField.getText();
+					if(peselTextField.getText().equals("Pesel")){
+						
+						pesel = "";
+					}
+					
 					String nrTel = nrTelTextField.getText();
+					if(nrTelTextField.getText().equals("Nr Tel")){
+						
+						nrTel = "";
+					}
+					
 					String nrKonta = nrKontaTextField.getText();
+					if(nrKontaTextField.getText().equals("Nr Konta")){
+						
+						nrKonta = "";
+					}
+					
 					
 					List<Pracownik> listaPracownikow = null;
 					
@@ -134,11 +179,31 @@ public class PracownikSearch extends JFrame {
 		contentPane.setLayout(null);
 		
 		nazwiskoTextField = new JTextField();
+		nazwiskoTextField.setForeground(Color.GRAY);
 		nazwiskoTextField.setToolTipText("Nazwisko");
+		nazwiskoTextField.setText("Nazwisko");
 		nazwiskoTextField.setBounds(15, 40, 120, 20);
 		contentPane.add(nazwiskoTextField);
 		nazwiskoTextField.setColumns(10);
 		contentPane.add(btnSzukaj);
+		
+	    nazwiskoTextField.addFocusListener(new FocusListener(){
+	    	
+	        public void focusGained(FocusEvent e){
+	        	if (nazwiskoTextField.getText().equals("Nazwisko")){
+	        		nazwiskoTextField.setText(null);
+	        		nazwiskoTextField.setForeground(Color.BLACK);
+			     }
+	            
+	        }
+
+			public void focusLost(FocusEvent e) {
+				if (nazwiskoTextField.getText().equals("")){
+					nazwiskoTextField.setForeground(Color.GRAY);
+					nazwiskoTextField.setText("Nazwisko");
+				     }
+			}
+	    });
 		
 		
 		table = new JTable();
@@ -163,45 +228,186 @@ public class PracownikSearch extends JFrame {
 		contentPane.add(btnDodaj);
 		
 		stanowiskoTextField = new JTextField();
+		stanowiskoTextField.setForeground(Color.GRAY);
 		stanowiskoTextField.setToolTipText("Stanowisko");
+		stanowiskoTextField.setText("Stanowisko");
 		stanowiskoTextField.setBounds(275, 40, 120, 20);
 		contentPane.add(stanowiskoTextField);
 		stanowiskoTextField.setColumns(10);
 		
+	    stanowiskoTextField.addFocusListener(new FocusListener(){
+	    	
+	        public void focusGained(FocusEvent e){
+	        	if (stanowiskoTextField.getText().equals("Stanowisko")){
+	        		stanowiskoTextField.setText(null);
+	        		stanowiskoTextField.setForeground(Color.BLACK);
+			     }
+	            
+	        }
+
+			public void focusLost(FocusEvent e) {
+				if (stanowiskoTextField.getText().equals("")){
+					stanowiskoTextField.setForeground(Color.GRAY);
+				      	stanowiskoTextField.setText("Stanowisko");
+				     }
+			}
+	    });
+		
 		imieTextField = new JTextField();
+		imieTextField.setForeground(Color.GRAY);
 		imieTextField.setToolTipText("Imie");
+		imieTextField.setText("Imie");
 		imieTextField.setBounds(145, 40, 120, 20);
 		contentPane.add(imieTextField);
 		imieTextField.setColumns(10);
 		
+		imieTextField.addFocusListener(new FocusListener(){
+	    	
+	        public void focusGained(FocusEvent e){
+	        	if (imieTextField.getText().equals("Imie")){
+	        		imieTextField.setText(null);
+	        		imieTextField.setForeground(Color.BLACK);
+			     }
+	            
+	        }
+
+			public void focusLost(FocusEvent e) {
+				if (imieTextField.getText().equals("")){
+					imieTextField.setForeground(Color.GRAY);
+					imieTextField.setText("Imie");
+				     }
+			}
+	    });
+		
 		ulicaTextField = new JTextField();
+		ulicaTextField.setForeground(Color.GRAY);
 		ulicaTextField.setToolTipText("Ulica");
+		ulicaTextField.setText("Ulica");
 		ulicaTextField.setBounds(405, 40, 120, 20);
 		contentPane.add(ulicaTextField);
 		ulicaTextField.setColumns(10);
 		
+		ulicaTextField.addFocusListener(new FocusListener(){
+	    	
+	        public void focusGained(FocusEvent e){
+	        	if (ulicaTextField.getText().equals("Ulica")){
+	        		ulicaTextField.setText(null);
+	        		ulicaTextField.setForeground(Color.BLACK);
+			     }
+	            
+	        }
+
+			public void focusLost(FocusEvent e) {
+				if (ulicaTextField.getText().equals("")){
+					ulicaTextField.setForeground(Color.GRAY);
+					ulicaTextField.setText("Ulica");
+				     }
+			}
+	    });
+		
 		miejscowoscTextField = new JTextField();
+		miejscowoscTextField.setForeground(Color.GRAY);
 		miejscowoscTextField.setToolTipText("Miejscowosc");
+		miejscowoscTextField.setText("Miejscowosc");
 		miejscowoscTextField.setBounds(535, 40, 120, 20);
 		contentPane.add(miejscowoscTextField);
 		miejscowoscTextField.setColumns(10);
 		
+	    miejscowoscTextField.addFocusListener(new FocusListener(){
+	    	
+	        public void focusGained(FocusEvent e){
+	        	if (miejscowoscTextField.getText().equals("Miejscowosc")){
+	        		miejscowoscTextField.setText(null);
+	        		miejscowoscTextField.setForeground(Color.BLACK);
+			     }
+	            
+	        }
+
+			public void focusLost(FocusEvent e) {
+				if (miejscowoscTextField.getText().equals("")){
+					miejscowoscTextField.setForeground(Color.GRAY);
+					miejscowoscTextField.setText("Miejscowosc");
+				     }
+			}
+	    });
+		
 		peselTextField = new JTextField();
+		peselTextField.setForeground(Color.GRAY);
 		peselTextField.setToolTipText("Pesel");
+		peselTextField.setText("Pesel");
 		peselTextField.setBounds(665, 40, 120, 20);
 		contentPane.add(peselTextField);
 		peselTextField.setColumns(10);
 		
+		peselTextField.addFocusListener(new FocusListener(){
+	    	
+	        public void focusGained(FocusEvent e){
+	        	if (peselTextField.getText().equals("Pesel")){
+	        		peselTextField.setText(null);
+	        		peselTextField.setForeground(Color.BLACK);
+			     }
+	            
+	        }
+
+			public void focusLost(FocusEvent e) {
+				if (peselTextField.getText().equals("")){
+					peselTextField.setForeground(Color.GRAY);
+					peselTextField.setText("Pesel");
+				     }
+			}
+	    });
+		
 		nrKontaTextField = new JTextField();
+		nrKontaTextField.setForeground(Color.GRAY);
+		nrKontaTextField.setToolTipText("Nr Konta");
+		nrKontaTextField.setText("Nr Konta");
 		nrKontaTextField.setBounds(795, 40, 120, 20);
 		contentPane.add(nrKontaTextField);
 		nrKontaTextField.setColumns(10);
 		
+		nrKontaTextField.addFocusListener(new FocusListener(){
+	    	
+	        public void focusGained(FocusEvent e){
+	        	if (nrKontaTextField.getText().equals("Nr Konta")){
+	        		nrKontaTextField.setText(null);
+	        		nrKontaTextField.setForeground(Color.BLACK);
+			     }
+	            
+	        }
+
+			public void focusLost(FocusEvent e) {
+				if (nrKontaTextField.getText().equals("")){
+					nrKontaTextField.setForeground(Color.GRAY);
+					nrKontaTextField.setText("Nr Konta");
+				     }
+			}
+	    });
+		
 		nrTelTextField = new JTextField();
-		nrTelTextField.setToolTipText("numer telefonu");
+		nrTelTextField.setForeground(Color.GRAY);
+		nrTelTextField.setToolTipText("Nr Tel");
+		nrTelTextField.setText("Nr Tel");
 		nrTelTextField.setBounds(925, 40, 120, 20);
 		contentPane.add(nrTelTextField);
 		nrTelTextField.setColumns(10);
+		
+		nrTelTextField.addFocusListener(new FocusListener(){
+	    	
+	        public void focusGained(FocusEvent e){
+	        	if (nrTelTextField.getText().equals("Nr Tel")){
+	        		nrTelTextField.setText(null);
+	        		nrTelTextField.setForeground(Color.BLACK);
+			     }
+	            
+	        }
+
+			public void focusLost(FocusEvent e) {
+				if (nrTelTextField.getText().equals("")){
+					nrTelTextField.setForeground(Color.GRAY);
+					nrTelTextField.setText("Nr Tel");
+				     }
+			}
+	    });
 		
 		btnEdytuj = new JButton("Edytuj");
 		btnEdytuj.addActionListener(new ActionListener() {
@@ -229,7 +435,7 @@ public class PracownikSearch extends JFrame {
 				
 			}
 		});
-		btnEdytuj.setBounds(1089, 190, 98, 33);
+		btnEdytuj.setBounds(1089, 190, 98, 38);
 		contentPane.add(btnEdytuj);
 		
 		btnUsun = new JButton("Usun");
@@ -247,7 +453,8 @@ public class PracownikSearch extends JFrame {
 					}
 					
 					//potwierdzenie od uzytkownika
-					int odpowiedz = JOptionPane.showConfirmDialog(PracownikSearch.this, "Usunac pracownika?", "Potwierdz", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					int odpowiedz = JOptionPane.showConfirmDialog(PracownikSearch.this, "Usunac pracownika?",
+							"Potwierdz", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 					if(odpowiedz != JOptionPane.YES_OPTION){
 						return;
 					}
@@ -262,7 +469,7 @@ public class PracownikSearch extends JFrame {
 					odswierzListePracownikow();
 					
 					//wyswietl potwierdzenie
-					JOptionPane.showMessageDialog(PracownikSearch.this, "Pracownik usuniêty", "Usunieto", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(PracownikSearch.this, "Pracownik usuniï¿½ty", "Usunieto", JOptionPane.INFORMATION_MESSAGE);
 					
 				}catch(Exception ex){
 					JOptionPane.showMessageDialog(PracownikSearch.this, "Blad przy usuwaniu pracownika: " + ex.getMessage(), "BLAD", JOptionPane.ERROR_MESSAGE);
@@ -272,7 +479,7 @@ public class PracownikSearch extends JFrame {
 				
 			}
 		});
-		btnUsun.setBounds(1089, 260, 98, 33);
+		btnUsun.setBounds(1089, 260, 98, 38);
 		contentPane.add(btnUsun);
 		
 	}

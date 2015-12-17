@@ -1,4 +1,6 @@
 package dao;
+import static org.junit.Assert.assertEquals;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -163,6 +165,7 @@ public class PracownikDAO {
 				Pracownik tempPracownik = convertRowToPracownik(myRs);
 				list.add(tempPracownik);
 			}
+			
 			
 			return list;
 			

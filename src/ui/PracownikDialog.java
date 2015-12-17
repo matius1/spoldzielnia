@@ -82,9 +82,7 @@ public class PracownikDialog extends JDialog {
 		this.pracownikSearch = pracownikSearch;
 	}
 
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		try {
 			PracownikDialog dialog = new PracownikDialog();
@@ -95,9 +93,7 @@ public class PracownikDialog extends JDialog {
 		}
 	}
 
-	/**
-	 * Create the dialog.
-	 */
+
 	public PracownikDialog() {
 		setTitle("Dodaj Pracownika");
 		setBounds(100, 100, 450, 350);
@@ -341,9 +337,9 @@ public class PracownikDialog extends JDialog {
 			
 			//potwierdzenie
 			if(edycja){
-				JOptionPane.showMessageDialog(pracownikSearch, "Edycja przebiegla pomyœlnie.", "Pracownik Dodany", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(pracownikSearch, "Edycja przebiegla pomyï¿½lnie.", "Pracownik Dodany", JOptionPane.INFORMATION_MESSAGE);
 			}else{
-				JOptionPane.showMessageDialog(pracownikSearch, "Pracownik dodany pomyœlnie.", "Pracownik Dodany", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(pracownikSearch, "Pracownik dodany pomyï¿½lnie.", "Pracownik Dodany", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}catch(Exception e){
 			JOptionPane.showMessageDialog(pracownikSearch, "Blad przy dodawaniu pracownika: " + e.getMessage(), "BLAD!", JOptionPane.INFORMATION_MESSAGE);

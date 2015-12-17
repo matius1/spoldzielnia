@@ -30,9 +30,7 @@ import java.awt.Insets;
 
 public class PracownikSearch extends JFrame {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField nazwiskoTextField;
@@ -53,9 +51,7 @@ public class PracownikSearch extends JFrame {
 	
 	
 
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -69,9 +65,7 @@ public class PracownikSearch extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+
 	public PracownikSearch() {
 		
 		//DAO
@@ -96,6 +90,7 @@ public class PracownikSearch extends JFrame {
 				try{
 					//pobierz nazwisko z nazwiskoTextField
 					// sprawdzanie czy nie ma tam tekstu z ficzera
+					//gdy jest zamienia na pustego stringa
 					String nazwisko = nazwiskoTextField.getText();
 					if(nazwiskoTextField.getText().equals("Nazwisko")){
 						
@@ -188,6 +183,8 @@ public class PracownikSearch extends JFrame {
 		nazwiskoTextField.setColumns(10);
 		contentPane.add(btnSzukaj);
 		
+		//po kilkieciu w okienko wpisywania usuwa tekst
+		//a gdy niczego nie wpisalismy, wpisuje ponownie podpowiedz
 	    nazwiskoTextField.addFocusListener(new FocusListener(){
 	    	
 	        public void focusGained(FocusEvent e){

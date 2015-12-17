@@ -88,7 +88,7 @@ public class PracownikSearch extends JFrame {
 		setLocationRelativeTo(null);
 		
 		JButton btnSzukaj = new JButton("Szukaj");
-		btnSzukaj.setBounds(1089, 34, 98, 38);
+		btnSzukaj.setBounds(1089, 15, 98, 38);
 		btnSzukaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -183,7 +183,7 @@ public class PracownikSearch extends JFrame {
 		nazwiskoTextField.setForeground(Color.GRAY);
 		nazwiskoTextField.setToolTipText("Nazwisko");
 		nazwiskoTextField.setText("Nazwisko");
-		nazwiskoTextField.setBounds(15, 40, 120, 20);
+		nazwiskoTextField.setBounds(15, 23, 120, 20);
 		contentPane.add(nazwiskoTextField);
 		nazwiskoTextField.setColumns(10);
 		contentPane.add(btnSzukaj);
@@ -228,14 +228,14 @@ public class PracownikSearch extends JFrame {
 				
 			}
 		});
-		btnDodaj.setBounds(1089, 123, 98, 38);
+		btnDodaj.setBounds(1089, 109, 98, 38);
 		contentPane.add(btnDodaj);
 		
 		stanowiskoTextField = new JTextField();
 		stanowiskoTextField.setForeground(Color.GRAY);
 		stanowiskoTextField.setToolTipText("Stanowisko");
 		stanowiskoTextField.setText("Stanowisko");
-		stanowiskoTextField.setBounds(275, 40, 120, 20);
+		stanowiskoTextField.setBounds(279, 23, 120, 20);
 		contentPane.add(stanowiskoTextField);
 		stanowiskoTextField.setColumns(10);
 		
@@ -261,7 +261,7 @@ public class PracownikSearch extends JFrame {
 		imieTextField.setForeground(Color.GRAY);
 		imieTextField.setToolTipText("Imie");
 		imieTextField.setText("Imie");
-		imieTextField.setBounds(145, 40, 120, 20);
+		imieTextField.setBounds(147, 23, 120, 20);
 		contentPane.add(imieTextField);
 		imieTextField.setColumns(10);
 		
@@ -287,7 +287,7 @@ public class PracownikSearch extends JFrame {
 		ulicaTextField.setForeground(Color.GRAY);
 		ulicaTextField.setToolTipText("Ulica");
 		ulicaTextField.setText("Ulica");
-		ulicaTextField.setBounds(405, 40, 120, 20);
+		ulicaTextField.setBounds(413, 23, 120, 20);
 		contentPane.add(ulicaTextField);
 		ulicaTextField.setColumns(10);
 		
@@ -313,7 +313,7 @@ public class PracownikSearch extends JFrame {
 		miejscowoscTextField.setForeground(Color.GRAY);
 		miejscowoscTextField.setToolTipText("Miejscowosc");
 		miejscowoscTextField.setText("Miejscowosc");
-		miejscowoscTextField.setBounds(535, 40, 120, 20);
+		miejscowoscTextField.setBounds(545, 23, 120, 20);
 		contentPane.add(miejscowoscTextField);
 		miejscowoscTextField.setColumns(10);
 		
@@ -338,7 +338,7 @@ public class PracownikSearch extends JFrame {
 		peselTextField.setForeground(Color.GRAY);
 		peselTextField.setToolTipText("Pesel");
 		peselTextField.setText("Pesel");
-		peselTextField.setBounds(665, 40, 120, 20);
+		peselTextField.setBounds(677, 23, 120, 20);
 		contentPane.add(peselTextField);
 		peselTextField.setColumns(10);
 		
@@ -364,7 +364,7 @@ public class PracownikSearch extends JFrame {
 		nrKontaTextField.setForeground(Color.GRAY);
 		nrKontaTextField.setToolTipText("Nr Konta");
 		nrKontaTextField.setText("Nr Konta");
-		nrKontaTextField.setBounds(795, 40, 120, 20);
+		nrKontaTextField.setBounds(809, 23, 120, 20);
 		contentPane.add(nrKontaTextField);
 		nrKontaTextField.setColumns(10);
 		
@@ -390,7 +390,7 @@ public class PracownikSearch extends JFrame {
 		nrTelTextField.setForeground(Color.GRAY);
 		nrTelTextField.setToolTipText("Nr Tel");
 		nrTelTextField.setText("Nr Tel");
-		nrTelTextField.setBounds(925, 40, 120, 20);
+		nrTelTextField.setBounds(941, 23, 120, 20);
 		contentPane.add(nrTelTextField);
 		nrTelTextField.setColumns(10);
 		
@@ -440,7 +440,7 @@ public class PracownikSearch extends JFrame {
 				
 			}
 		});
-		btnEdytuj.setBounds(1089, 190, 98, 38);
+		btnEdytuj.setBounds(1089, 159, 98, 38);
 		contentPane.add(btnEdytuj);
 		
 		btnUsun = new JButton("Usun");
@@ -484,7 +484,7 @@ public class PracownikSearch extends JFrame {
 				
 			}
 		});
-		btnUsun.setBounds(1089, 260, 98, 38);
+		btnUsun.setBounds(1089, 209, 98, 38);
 		contentPane.add(btnUsun);
 		
 	}

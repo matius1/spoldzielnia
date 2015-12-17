@@ -241,11 +241,13 @@ public class PracownikDAO {
 			
 			myStmt.executeUpdate();
 			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
 			close(myStmt);
 		}
+		
 	}
 	
 	

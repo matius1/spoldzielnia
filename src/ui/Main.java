@@ -11,7 +11,9 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import core.Pracownik;
+import core.Wlasciciel;
 import dao.PracownikDAO;
+import dao.WlascicielDAO;
 
 import java.awt.GridLayout;
 import javax.swing.JTabbedPane;
@@ -31,24 +33,45 @@ import java.awt.event.ActionEvent;
 
 public class Main extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	private JPanel contentPane;
 	
 	
 	private JTable table;
+	private JTable tableW;
 	
-	private JTextField nazwiskoTextField;
+	private JTextField nazwiskoTextFieldP;
+	private JScrollPane scrollPaneP;
+	private JTextField stanowiskoTextFieldP;
+	private JTextField imieTextFieldP;
+	private JTextField ulicaTextFieldP;
+	private JTextField miejscowoscTextFieldP;
+	private JTextField peselTextFieldP;
+	private JTextField nrKontaTextFieldP;
+	private JTextField nrTelTextFieldP;
+	private JButton btnEdytujP;
+	private JButton btnUsunP;
+	
+	
 	private PracownikDAO pracownikDao;
-	private JScrollPane scrollPane;
-	private JTextField stanowiskoTextField;
-	private JTextField imieTextField;
-	private JTextField ulicaTextField;
-	private JTextField miejscowoscTextField;
-	private JTextField peselTextField;
-	private JTextField nrKontaTextField;
-	private JTextField nrTelTextField;
-	private JButton btnEdytuj;
-	private JButton btnUsun;
-	
+	private WlascicielDAO wlascicielDao;
+	private JTextField nazwiskoWTextField;
+	private JScrollPane scrollPaneWlasciciele; 
+	private JScrollPane scrollPaneWlasciciele_1;
+	private JTextField imieWTextField;
+	private JTextField peselWTextField;
+	private JTextField ulicaWTextField;
+	private JTextField miejscowoscWTextField;
+	private JTextField nrTelWTextField;
+	private JButton btnDodajW;
+	private JButton btnEdytujW;
+	private JButton btnUsunW;
+
 
 	/**
 	 * Launch the application.
@@ -57,6 +80,7 @@ public class Main extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					Main frame = new Main();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -73,6 +97,7 @@ public class Main extends JFrame {
 		
 		//DAO
 		pracownikDao = new PracownikDAO();
+		wlascicielDao = new WlascicielDAO();
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,66 +118,67 @@ public class Main extends JFrame {
 		lblWitaj.setBounds(358, 157, 46, 14);
 		MenuTab.add(lblWitaj);
 		
-		JPanel PracownicyTab = new JPanel();
-		tabbedPane.addTab("Pracownicy", null, PracownicyTab, null);
-		PracownicyTab.setLayout(null);
 		
 		
 		
 ////////////////////////////////	Pracownicy TAB		
 		
+		JPanel PracownicyTab = new JPanel();
+		tabbedPane.addTab("Pracownicy", null, PracownicyTab, null);
+		PracownicyTab.setLayout(null);
+		
 		
 		table = new JTable();
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 71, 1051, 431);
-		scrollPane.setViewportView(table);
-		PracownicyTab.add(scrollPane);
+		scrollPaneP = new JScrollPane();
+		scrollPaneP.setBounds(10, 71, 1051, 431);
+		scrollPaneP.setViewportView(table);
+		PracownicyTab.add(scrollPaneP);
 		
 		
-		JButton btnSzukaj = new JButton("Szukaj");
-		btnSzukaj.addActionListener(new ActionListener() {
+		JButton btnSzukajP = new JButton("Szukaj");
+		btnSzukajP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				
 				try{
 					//pobierz nazwisko z nazwiskoTextField, sprawdzanie czy nie ma tam tekstu z ficzera, gdy jest zamienia na pustego stringa
-					String nazwisko = nazwiskoTextField.getText();
-					if(nazwiskoTextField.getText().equals("Nazwisko")){
+					String nazwisko = nazwiskoTextFieldP.getText();
+					if(nazwiskoTextFieldP.getText().equals("Nazwisko")){
 						nazwisko= "";
 					}
 					
-					String stanowisko = stanowiskoTextField.getText();
-					if(stanowiskoTextField.getText().equals("Stanowisko")){
+					String stanowisko = stanowiskoTextFieldP.getText();
+					if(stanowiskoTextFieldP.getText().equals("Stanowisko")){
 						stanowisko = "";
 					}
 					
-					String imie = imieTextField.getText();
-					if(imieTextField.getText().equals("Imie")){
+					String imie = imieTextFieldP.getText();
+					if(imieTextFieldP.getText().equals("Imie")){
 						imie = "";
 					}
 					
-					String ulica = ulicaTextField.getText();
-					if(ulicaTextField.getText().equals("Ulica")){
+					String ulica = ulicaTextFieldP.getText();
+					if(ulicaTextFieldP.getText().equals("Ulica")){
 						ulica = "";
 					}
 					
-					String miejscowosc = miejscowoscTextField.getText();
-					if(miejscowoscTextField.getText().equals("Miejscowosc")){
+					String miejscowosc = miejscowoscTextFieldP.getText();
+					if(miejscowoscTextFieldP.getText().equals("Miejscowosc")){
 						miejscowosc = "";
 					}
 					
-					String pesel = peselTextField.getText();
-					if(peselTextField.getText().equals("Pesel")){
+					String pesel = peselTextFieldP.getText();
+					if(peselTextFieldP.getText().equals("Pesel")){
 						pesel = "";
 					}
 					
-					String nrTel = nrTelTextField.getText();
-					if(nrTelTextField.getText().equals("Nr Tel")){
+					String nrTel = nrTelTextFieldP.getText();
+					if(nrTelTextFieldP.getText().equals("Nr Tel")){
 						nrTel = "";
 					}
 					
-					String nrKonta = nrKontaTextField.getText();
-					if(nrKontaTextField.getText().equals("Nr Konta")){
+					String nrKonta = nrKontaTextFieldP.getText();
+					if(nrKontaTextFieldP.getText().equals("Nr Konta")){
 						nrKonta = "";
 					}
 					
@@ -179,39 +205,39 @@ public class Main extends JFrame {
 				
 			}
 		});
-		btnSzukaj.setBounds(1098, 22, 89, 23);
-		PracownicyTab.add(btnSzukaj);
+		btnSzukajP.setBounds(1098, 22, 89, 23);
+		PracownicyTab.add(btnSzukajP);
 		
 
-		nazwiskoTextField = new JTextField();
-		nazwiskoTextField.setForeground(Color.GRAY);
-		nazwiskoTextField.setToolTipText("Nazwisko");
-		nazwiskoTextField.setText("Nazwisko");
-		nazwiskoTextField.setBounds(15, 23, 120, 20);
-		PracownicyTab.add(nazwiskoTextField);
-		nazwiskoTextField.setColumns(10);
-		PracownicyTab.add(btnSzukaj);
+		nazwiskoTextFieldP = new JTextField();
+		nazwiskoTextFieldP.setForeground(Color.GRAY);
+		nazwiskoTextFieldP.setToolTipText("Nazwisko");
+		nazwiskoTextFieldP.setText("Nazwisko");
+		nazwiskoTextFieldP.setBounds(15, 23, 120, 20);
+		PracownicyTab.add(nazwiskoTextFieldP);
+		nazwiskoTextFieldP.setColumns(10);
+		PracownicyTab.add(btnSzukajP);
 		
 		//po kilkieciu w okienko wpisywania usuwa tekst, a gdy niczego nie wpisalismy, wpisuje ponownie podpowiedz
-	    nazwiskoTextField.addFocusListener(new FocusListener(){
+	    nazwiskoTextFieldP.addFocusListener(new FocusListener(){
 	    	
 	        public void focusGained(FocusEvent e){
-	        	if (nazwiskoTextField.getText().equals("Nazwisko")){
-	        		nazwiskoTextField.setText(null);
-	        		nazwiskoTextField.setForeground(Color.BLACK);
+	        	if (nazwiskoTextFieldP.getText().equals("Nazwisko")){
+	        		nazwiskoTextFieldP.setText(null);
+	        		nazwiskoTextFieldP.setForeground(Color.BLACK);
 			     }
 	        }
 
 			public void focusLost(FocusEvent e) {
-				if (nazwiskoTextField.getText().equals("")){
-					nazwiskoTextField.setForeground(Color.GRAY);
-					nazwiskoTextField.setText("Nazwisko");
+				if (nazwiskoTextFieldP.getText().equals("")){
+					nazwiskoTextFieldP.setForeground(Color.GRAY);
+					nazwiskoTextFieldP.setText("Nazwisko");
 				     }
 			}
 	    });
 		
-		JButton btnDodaj = new JButton("Dodaj");
-		btnDodaj.addActionListener(new ActionListener() {
+		JButton btnDodajP = new JButton("Dodaj");
+		btnDodajP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//stworz okienko
 				PracownikDialog okienko = new PracownikDialog(pracownikDao, Main.this);
@@ -222,189 +248,189 @@ public class Main extends JFrame {
 				okienko.setVisible(true);	
 			}
 		});
-		btnDodaj.setBounds(1089, 109, 98, 38);
-		PracownicyTab.add(btnDodaj);
+		btnDodajP.setBounds(1089, 109, 98, 38);
+		PracownicyTab.add(btnDodajP);
 		
-		stanowiskoTextField = new JTextField();
-		stanowiskoTextField.setForeground(Color.GRAY);
-		stanowiskoTextField.setToolTipText("Stanowisko");
-		stanowiskoTextField.setText("Stanowisko");
-		stanowiskoTextField.setBounds(279, 23, 120, 20);
-		PracownicyTab.add(stanowiskoTextField);
-		stanowiskoTextField.setColumns(10);
+		stanowiskoTextFieldP = new JTextField();
+		stanowiskoTextFieldP.setForeground(Color.GRAY);
+		stanowiskoTextFieldP.setToolTipText("Stanowisko");
+		stanowiskoTextFieldP.setText("Stanowisko");
+		stanowiskoTextFieldP.setBounds(279, 23, 120, 20);
+		PracownicyTab.add(stanowiskoTextFieldP);
+		stanowiskoTextFieldP.setColumns(10);
 		
-	    stanowiskoTextField.addFocusListener(new FocusListener(){
+	    stanowiskoTextFieldP.addFocusListener(new FocusListener(){
 	    	
 	        public void focusGained(FocusEvent e){
-	        	if (stanowiskoTextField.getText().equals("Stanowisko")){
-	        		stanowiskoTextField.setText(null);
-	        		stanowiskoTextField.setForeground(Color.BLACK);
+	        	if (stanowiskoTextFieldP.getText().equals("Stanowisko")){
+	        		stanowiskoTextFieldP.setText(null);
+	        		stanowiskoTextFieldP.setForeground(Color.BLACK);
 			     }
 	        }
 
 			public void focusLost(FocusEvent e) {
-				if (stanowiskoTextField.getText().equals("")){
-					stanowiskoTextField.setForeground(Color.GRAY);
-				      	stanowiskoTextField.setText("Stanowisko");
+				if (stanowiskoTextFieldP.getText().equals("")){
+					stanowiskoTextFieldP.setForeground(Color.GRAY);
+				      	stanowiskoTextFieldP.setText("Stanowisko");
 				     }
 			}
 	    });
 		
-		imieTextField = new JTextField();
-		imieTextField.setForeground(Color.GRAY);
-		imieTextField.setToolTipText("Imie");
-		imieTextField.setText("Imie");
-		imieTextField.setBounds(147, 23, 120, 20);
-		PracownicyTab.add(imieTextField);
-		imieTextField.setColumns(10);
+		imieTextFieldP = new JTextField();
+		imieTextFieldP.setForeground(Color.GRAY);
+		imieTextFieldP.setToolTipText("Imie");
+		imieTextFieldP.setText("Imie");
+		imieTextFieldP.setBounds(147, 23, 120, 20);
+		PracownicyTab.add(imieTextFieldP);
+		imieTextFieldP.setColumns(10);
 		
-		imieTextField.addFocusListener(new FocusListener(){
+		imieTextFieldP.addFocusListener(new FocusListener(){
 	    	
 	        public void focusGained(FocusEvent e){
-	        	if (imieTextField.getText().equals("Imie")){
-	        		imieTextField.setText(null);
-	        		imieTextField.setForeground(Color.BLACK);
-			     }
-	            
-	        }
-
-			public void focusLost(FocusEvent e) {
-				if (imieTextField.getText().equals("")){
-					imieTextField.setForeground(Color.GRAY);
-					imieTextField.setText("Imie");
-				     }
-			}
-	    });
-		
-		ulicaTextField = new JTextField();
-		ulicaTextField.setForeground(Color.GRAY);
-		ulicaTextField.setToolTipText("Ulica");
-		ulicaTextField.setText("Ulica");
-		ulicaTextField.setBounds(413, 23, 120, 20);
-		PracownicyTab.add(ulicaTextField);
-		ulicaTextField.setColumns(10);
-		
-		ulicaTextField.addFocusListener(new FocusListener(){
-	    	
-	        public void focusGained(FocusEvent e){
-	        	if (ulicaTextField.getText().equals("Ulica")){
-	        		ulicaTextField.setText(null);
-	        		ulicaTextField.setForeground(Color.BLACK);
+	        	if (imieTextFieldP.getText().equals("Imie")){
+	        		imieTextFieldP.setText(null);
+	        		imieTextFieldP.setForeground(Color.BLACK);
 			     }
 	            
 	        }
 
 			public void focusLost(FocusEvent e) {
-				if (ulicaTextField.getText().equals("")){
-					ulicaTextField.setForeground(Color.GRAY);
-					ulicaTextField.setText("Ulica");
+				if (imieTextFieldP.getText().equals("")){
+					imieTextFieldP.setForeground(Color.GRAY);
+					imieTextFieldP.setText("Imie");
 				     }
 			}
 	    });
 		
-		miejscowoscTextField = new JTextField();
-		miejscowoscTextField.setForeground(Color.GRAY);
-		miejscowoscTextField.setToolTipText("Miejscowosc");
-		miejscowoscTextField.setText("Miejscowosc");
-		miejscowoscTextField.setBounds(545, 23, 120, 20);
-		PracownicyTab.add(miejscowoscTextField);
-		miejscowoscTextField.setColumns(10);
+		ulicaTextFieldP = new JTextField();
+		ulicaTextFieldP.setForeground(Color.GRAY);
+		ulicaTextFieldP.setToolTipText("Ulica");
+		ulicaTextFieldP.setText("Ulica");
+		ulicaTextFieldP.setBounds(413, 23, 120, 20);
+		PracownicyTab.add(ulicaTextFieldP);
+		ulicaTextFieldP.setColumns(10);
 		
-	    miejscowoscTextField.addFocusListener(new FocusListener(){
+		ulicaTextFieldP.addFocusListener(new FocusListener(){
 	    	
 	        public void focusGained(FocusEvent e){
-	        	if (miejscowoscTextField.getText().equals("Miejscowosc")){
-	        		miejscowoscTextField.setText(null);
-	        		miejscowoscTextField.setForeground(Color.BLACK);
-			     }
-	        }
-
-			public void focusLost(FocusEvent e) {
-				if (miejscowoscTextField.getText().equals("")){
-					miejscowoscTextField.setForeground(Color.GRAY);
-					miejscowoscTextField.setText("Miejscowosc");
-				     }
-			}
-	    });
-		
-		peselTextField = new JTextField();
-		peselTextField.setForeground(Color.GRAY);
-		peselTextField.setToolTipText("Pesel");
-		peselTextField.setText("Pesel");
-		peselTextField.setBounds(677, 23, 120, 20);
-		PracownicyTab.add(peselTextField);
-		peselTextField.setColumns(10);
-		
-		peselTextField.addFocusListener(new FocusListener(){
-	    	
-	        public void focusGained(FocusEvent e){
-	        	if (peselTextField.getText().equals("Pesel")){
-	        		peselTextField.setText(null);
-	        		peselTextField.setForeground(Color.BLACK);
+	        	if (ulicaTextFieldP.getText().equals("Ulica")){
+	        		ulicaTextFieldP.setText(null);
+	        		ulicaTextFieldP.setForeground(Color.BLACK);
 			     }
 	            
 	        }
 
 			public void focusLost(FocusEvent e) {
-				if (peselTextField.getText().equals("")){
-					peselTextField.setForeground(Color.GRAY);
-					peselTextField.setText("Pesel");
+				if (ulicaTextFieldP.getText().equals("")){
+					ulicaTextFieldP.setForeground(Color.GRAY);
+					ulicaTextFieldP.setText("Ulica");
 				     }
 			}
 	    });
 		
-		nrKontaTextField = new JTextField();
-		nrKontaTextField.setForeground(Color.GRAY);
-		nrKontaTextField.setToolTipText("Nr Konta");
-		nrKontaTextField.setText("Nr Konta");
-		nrKontaTextField.setBounds(809, 23, 120, 20);
-		PracownicyTab.add(nrKontaTextField);
-		nrKontaTextField.setColumns(10);
+		miejscowoscTextFieldP = new JTextField();
+		miejscowoscTextFieldP.setForeground(Color.GRAY);
+		miejscowoscTextFieldP.setToolTipText("Miejscowosc");
+		miejscowoscTextFieldP.setText("Miejscowosc");
+		miejscowoscTextFieldP.setBounds(545, 23, 120, 20);
+		PracownicyTab.add(miejscowoscTextFieldP);
+		miejscowoscTextFieldP.setColumns(10);
 		
-		nrKontaTextField.addFocusListener(new FocusListener(){
+	    miejscowoscTextFieldP.addFocusListener(new FocusListener(){
 	    	
 	        public void focusGained(FocusEvent e){
-	        	if (nrKontaTextField.getText().equals("Nr Konta")){
-	        		nrKontaTextField.setText(null);
-	        		nrKontaTextField.setForeground(Color.BLACK);
+	        	if (miejscowoscTextFieldP.getText().equals("Miejscowosc")){
+	        		miejscowoscTextFieldP.setText(null);
+	        		miejscowoscTextFieldP.setForeground(Color.BLACK);
 			     }
 	        }
 
 			public void focusLost(FocusEvent e) {
-				if (nrKontaTextField.getText().equals("")){
-					nrKontaTextField.setForeground(Color.GRAY);
-					nrKontaTextField.setText("Nr Konta");
+				if (miejscowoscTextFieldP.getText().equals("")){
+					miejscowoscTextFieldP.setForeground(Color.GRAY);
+					miejscowoscTextFieldP.setText("Miejscowosc");
 				     }
 			}
 	    });
 		
-		nrTelTextField = new JTextField();
-		nrTelTextField.setForeground(Color.GRAY);
-		nrTelTextField.setToolTipText("Nr Tel");
-		nrTelTextField.setText("Nr Tel");
-		nrTelTextField.setBounds(941, 23, 120, 20);
-		PracownicyTab.add(nrTelTextField);
-		nrTelTextField.setColumns(10);
+		peselTextFieldP = new JTextField();
+		peselTextFieldP.setForeground(Color.GRAY);
+		peselTextFieldP.setToolTipText("Pesel");
+		peselTextFieldP.setText("Pesel");
+		peselTextFieldP.setBounds(677, 23, 120, 20);
+		PracownicyTab.add(peselTextFieldP);
+		peselTextFieldP.setColumns(10);
 		
-		nrTelTextField.addFocusListener(new FocusListener(){
+		peselTextFieldP.addFocusListener(new FocusListener(){
 	    	
 	        public void focusGained(FocusEvent e){
-	        	if (nrTelTextField.getText().equals("Nr Tel")){
-	        		nrTelTextField.setText(null);
-	        		nrTelTextField.setForeground(Color.BLACK);
+	        	if (peselTextFieldP.getText().equals("Pesel")){
+	        		peselTextFieldP.setText(null);
+	        		peselTextFieldP.setForeground(Color.BLACK);
+			     }
+	            
+	        }
+
+			public void focusLost(FocusEvent e) {
+				if (peselTextFieldP.getText().equals("")){
+					peselTextFieldP.setForeground(Color.GRAY);
+					peselTextFieldP.setText("Pesel");
+				     }
+			}
+	    });
+		
+		nrKontaTextFieldP = new JTextField();
+		nrKontaTextFieldP.setForeground(Color.GRAY);
+		nrKontaTextFieldP.setToolTipText("Nr Konta");
+		nrKontaTextFieldP.setText("Nr Konta");
+		nrKontaTextFieldP.setBounds(809, 23, 120, 20);
+		PracownicyTab.add(nrKontaTextFieldP);
+		nrKontaTextFieldP.setColumns(10);
+		
+		nrKontaTextFieldP.addFocusListener(new FocusListener(){
+	    	
+	        public void focusGained(FocusEvent e){
+	        	if (nrKontaTextFieldP.getText().equals("Nr Konta")){
+	        		nrKontaTextFieldP.setText(null);
+	        		nrKontaTextFieldP.setForeground(Color.BLACK);
 			     }
 	        }
 
 			public void focusLost(FocusEvent e) {
-				if (nrTelTextField.getText().equals("")){
-					nrTelTextField.setForeground(Color.GRAY);
-					nrTelTextField.setText("Nr Tel");
+				if (nrKontaTextFieldP.getText().equals("")){
+					nrKontaTextFieldP.setForeground(Color.GRAY);
+					nrKontaTextFieldP.setText("Nr Konta");
 				     }
 			}
 	    });
 		
-		btnEdytuj = new JButton("Edytuj");
-		btnEdytuj.addActionListener(new ActionListener() {
+		nrTelTextFieldP = new JTextField();
+		nrTelTextFieldP.setForeground(Color.GRAY);
+		nrTelTextFieldP.setToolTipText("Nr Tel");
+		nrTelTextFieldP.setText("Nr Tel");
+		nrTelTextFieldP.setBounds(941, 23, 120, 20);
+		PracownicyTab.add(nrTelTextFieldP);
+		nrTelTextFieldP.setColumns(10);
+		
+		nrTelTextFieldP.addFocusListener(new FocusListener(){
+	    	
+	        public void focusGained(FocusEvent e){
+	        	if (nrTelTextFieldP.getText().equals("Nr Tel")){
+	        		nrTelTextFieldP.setText(null);
+	        		nrTelTextFieldP.setForeground(Color.BLACK);
+			     }
+	        }
+
+			public void focusLost(FocusEvent e) {
+				if (nrTelTextFieldP.getText().equals("")){
+					nrTelTextFieldP.setForeground(Color.GRAY);
+					nrTelTextFieldP.setText("Nr Tel");
+				     }
+			}
+	    });
+		
+		btnEdytujP = new JButton("Edytuj");
+		btnEdytujP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("EDYCJA");
 				
@@ -430,11 +456,11 @@ public class Main extends JFrame {
 				okienko.setVisible(true);
 			}
 		});
-		btnEdytuj.setBounds(1089, 159, 98, 38);
-		PracownicyTab.add(btnEdytuj);
+		btnEdytujP.setBounds(1089, 159, 98, 38);
+		PracownicyTab.add(btnEdytujP);
 		
-		btnUsun = new JButton("Usun");
-		btnUsun.addActionListener(new ActionListener() {
+		btnUsunP = new JButton("Usun");
+		btnUsunP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				try{
@@ -454,7 +480,7 @@ public class Main extends JFrame {
 						return;
 					}
 					
-					//pobierdz zaznaczonego pracownika
+					//pobierz zaznaczonego pracownika
 					Pracownik tempPracownik = (Pracownik) table.getValueAt(row, PracownikModelTabeli.OBJECT_COL);
 					
 					//usun pracownika
@@ -474,9 +500,202 @@ public class Main extends JFrame {
 
 			}
 		});
-		btnUsun.setBounds(1089, 209, 98, 38);
-		PracownicyTab.add(btnUsun);
+		btnUsunP.setBounds(1089, 209, 98, 38);
+		PracownicyTab.add(btnUsunP);
+		
+		
 //////////////////////////// koniec PracownicyTab
+		
+		
+
+		
+		
+		
+//////////////////////////////////Wlasciciele TAB
+		JPanel WlasicieleTab = new JPanel();
+		tabbedPane.addTab("Wlasciciele", null, WlasicieleTab, null);
+		WlasicieleTab.setLayout(null);
+
+		
+		//
+		tableW = new JTable();
+		scrollPaneWlasciciele = new JScrollPane();
+		scrollPaneWlasciciele_1 = new JScrollPane();
+		scrollPaneWlasciciele_1.setBounds(35, 73, 1000, 390);
+		scrollPaneWlasciciele_1.setViewportView(tableW);
+		WlasicieleTab.add(scrollPaneWlasciciele_1);
+		//
+		
+		JButton btnSzukajWlasciciele = new JButton("Szukaj");
+		btnSzukajWlasciciele.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				try{
+				
+					String nazwisko = nazwiskoWTextField.getText();
+					if(nazwiskoWTextField.getText().equals("Nazwisko")){
+						nazwisko= "";
+					}
+				
+					String imie = imieWTextField.getText();
+					if(imieWTextField.getText().equals("Imie")){
+						imie = "";
+					}
+					
+					String ulica = ulicaWTextField.getText();
+					if(ulicaWTextField.getText().equals("Ulica")){
+						ulica = "";
+					}
+					
+					String miejscowosc = miejscowoscWTextField.getText();
+					if(miejscowoscWTextField.getText().equals("Miejscowosc")){
+						miejscowosc = "";
+					}
+					
+					String pesel = peselWTextField.getText();
+					if(peselWTextField.getText().equals("Pesel")){
+						pesel = "";
+					}
+					
+					String nrTel = nrTelWTextField.getText();
+					if(nrTelWTextField.getText().equals("Nr Tel")){
+						nrTel = "";
+					}
+				
+					
+				List<Wlasciciel> listaWlascicieli = null;
+				
+				//wywolaj DAO i pobierz pracownikow o szukanym nazwisku
+//				listaWlascicieli = wlascicielDao.szukajWlasciciel(nazwisko);
+				listaWlascicieli = wlascicielDao.szukajWlasciciel(nazwisko, imie, ulica, miejscowosc, pesel, nrTel);
+
+				//wyswietl liste
+				for(Wlasciciel temp: listaWlascicieli){
+					System.out.println(temp);
+				}
+				
+				//stworz model i odswiez tabele, wyswietl liste
+				WlascicielModelTabeli wlascicielModel = new WlascicielModelTabeli(listaWlascicieli);
+				tableW.setModel(wlascicielModel);
+
+				}catch(Exception e){
+					JOptionPane.showMessageDialog(Main.this, "Error: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+					System.err.println("B³¹d przy wyszukiwaniu: ");
+					System.err.println(e);
+				}
+				
+			}
+		});
+		
+		
+		btnSzukajWlasciciele.setBounds(1081, 27, 89, 23);
+		WlasicieleTab.add(btnSzukajWlasciciele);
+		
+		nazwiskoWTextField = new JTextField();
+		nazwiskoWTextField.setBounds(35, 28, 86, 20);
+		WlasicieleTab.add(nazwiskoWTextField);
+		nazwiskoWTextField.setColumns(10);
+		
+		imieWTextField = new JTextField();
+		imieWTextField.setBounds(213, 28, 86, 20);
+		WlasicieleTab.add(imieWTextField);
+		imieWTextField.setColumns(10);
+		
+		peselWTextField = new JTextField();
+		peselWTextField.setText("");
+		peselWTextField.setBounds(424, 28, 86, 20);
+		WlasicieleTab.add(peselWTextField);
+		peselWTextField.setColumns(10);
+		
+		ulicaWTextField = new JTextField();
+		ulicaWTextField.setBounds(604, 28, 86, 20);
+		WlasicieleTab.add(ulicaWTextField);
+		ulicaWTextField.setColumns(10);
+		
+		miejscowoscWTextField = new JTextField();
+		miejscowoscWTextField.setBounds(761, 28, 86, 20);
+		WlasicieleTab.add(miejscowoscWTextField);
+		miejscowoscWTextField.setColumns(10);
+		
+		nrTelWTextField = new JTextField();
+		nrTelWTextField.setBounds(907, 28, 86, 20);
+		WlasicieleTab.add(nrTelWTextField);
+		nrTelWTextField.setColumns(10);
+		
+		btnDodajW = new JButton("Dodaj");
+		btnDodajW.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+			}
+		});
+		btnDodajW.setBounds(1081, 82, 89, 23);
+		WlasicieleTab.add(btnDodajW);
+		
+		btnEdytujW = new JButton("Edytuj");
+		btnEdytujW.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
+		btnEdytujW.setBounds(1081, 128, 89, 23);
+		WlasicieleTab.add(btnEdytujW);
+		
+		btnUsunW = new JButton("Usun");
+		btnUsunW.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+
+				try{
+					//pobierz numer wiersza
+					int row = table.getSelectedRow();
+					
+					//sprawdz czy jest zaznaczony wlasciciel
+					if(row<0){
+						JOptionPane.showMessageDialog(Main.this, "Musisz zaznaczyc wlasciciela", "BLAD", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+					
+					//potwierdzenie od uzytkownika
+					int odpowiedz = JOptionPane.showConfirmDialog(Main.this, "Usunac wlasciciela?",
+							"Potwierdz", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					if(odpowiedz != JOptionPane.YES_OPTION){
+						return;
+					}
+					
+					//pobierz zaznaczonego wlasciciela
+//					Pracownik tempPracownik = (Pracownik) table.getValueAt(row, PracownikModelTabeli.OBJECT_COL);
+					Wlasciciel tempWlasciciel = (Wlasciciel) table.getValueAt(row, WlascicielModelTabeli.OBJECT_COL);
+					
+					//usun pracownika
+//					pracownikDao.usunPracowni(tempPracownik.getId());
+//					wlascicielDao.usunWlasciciel(BigInteger(tempWlasciciel.getPesel()));
+					
+					//odswierz liste
+					odswierzListePracownikow();
+					
+					//wyswietl potwierdzenie
+					JOptionPane.showMessageDialog(Main.this, "Pracownik usuniï¿½ty", "Usunieto", JOptionPane.INFORMATION_MESSAGE);
+					
+				}catch(Exception ex){
+					JOptionPane.showMessageDialog(Main.this, "Blad przy usuwaniu pracownika: " + ex.getMessage(), "BLAD", JOptionPane.ERROR_MESSAGE);
+					System.err.println("Blad przy usuwaniu pracownika: " + ex.getMessage());
+					
+				}
+				
+				
+			}
+		});
+		btnUsunW.setBounds(1081, 172, 89, 23);
+		WlasicieleTab.add(btnUsunW);
+		
+		
+		
+		
 		
 		
 		
@@ -502,4 +721,21 @@ public class Main extends JFrame {
 	}
 	
 	
+	
+	public void odswierzListeWlascicieli() {
+
+		try {
+			List<Wlasciciel> wlasciciele = wlascicielDao.getAllWlasciciel();
+
+			// stworz model i odswierz tabele
+			WlascicielModelTabeli model = new WlascicielModelTabeli(wlasciciele);
+
+			table.setModel(model);
+			
+		} catch (Exception exc) {
+			JOptionPane.showMessageDialog(this, "BLAD: " + exc, "BLAD",
+					JOptionPane.ERROR_MESSAGE);
+		}
+		
+	}
 }

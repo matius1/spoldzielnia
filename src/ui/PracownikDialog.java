@@ -35,7 +35,6 @@ public class PracownikDialog extends JDialog {
 	
 	
 	private PracownikDAO pracownikDAO;
-	private PracownikSearch pracownikSearch;
 	private Main main1;
 	
 	private Pracownik poprzedniPracownik = null;
@@ -334,17 +333,17 @@ public class PracownikDialog extends JDialog {
 			dispose();
 			
 			//odswiez liste
-			pracownikSearch.odswierzListePracownikow();
+			main1.odswierzListePracownikow();
 			
 			//potwierdzenie
 			if(edycja){
-				JOptionPane.showMessageDialog(pracownikSearch, "Edycja przebiegla pomy�lnie.", "Pracownik Dodany", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(main1, "Edycja przebiegla pomyslnie.", "Pracownik Dodany", JOptionPane.INFORMATION_MESSAGE);
 			}else{
-				JOptionPane.showMessageDialog(pracownikSearch, "Pracownik dodany pomy�lnie.", "Pracownik Dodany", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(main1, "Pracownik dodany pomyslnie.", "Pracownik Dodany", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}catch(Exception e){
-//			JOptionPane.showMessageDialog(pracownikSearch, "Blad przy dodawaniu pracownika: " + e.getMessage(), "BLAD!", JOptionPane.INFORMATION_MESSAGE);
-//			System.err.println("Blad przy dodawaniu pracownika: " + e.getMessage());
+			JOptionPane.showMessageDialog(main1, "Blad przy dodawaniu pracownika: " + e.getMessage(), "BLAD!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Blad przy dodawaniu pracownika: " + e.getMessage());
 		}
 		
 		

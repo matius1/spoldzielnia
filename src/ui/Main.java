@@ -1,38 +1,38 @@
 package ui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.Caret;
 
 import core.Pracownik;
 import dao.PracownikDAO;
 
-
+import java.awt.GridLayout;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-
-public class PracownikSearch extends JFrame {
 
 
-	private static final long serialVersionUID = 1L;
+
+
+public class Main extends JFrame {
+
 	private JPanel contentPane;
+	
 	
 	private JTable table;
 	
@@ -49,15 +49,15 @@ public class PracownikSearch extends JFrame {
 	private JButton btnEdytuj;
 	private JButton btnUsun;
 	
-	
-	
 
-
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PracownikSearch frame = new PracownikSearch();
+					Main frame = new Main();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -66,77 +66,93 @@ public class PracownikSearch extends JFrame {
 		});
 	}
 
-
-	public PracownikSearch() {
+	/**
+	 * Create the frame.
+	 */
+	public Main() {
 		
 		//DAO
 		pracownikDao = new PracownikDAO();
 		
 		
-		//okno
-		setTitle("Szukaj Pracownika");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1226, 569);
+		setBounds(100, 100, 1230, 589);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		setLocationRelativeTo(null);
+		contentPane.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		contentPane.add(tabbedPane);
+		
+		JPanel MenuTab = new JPanel();
+		tabbedPane.addTab("Menu", null, MenuTab, null);
+		MenuTab.setLayout(null);
+		
+		JLabel lblWitaj = new JLabel("Witaj!");
+		lblWitaj.setBounds(358, 157, 46, 14);
+		MenuTab.add(lblWitaj);
+		
+		JPanel PracownicyTab = new JPanel();
+		tabbedPane.addTab("Pracownicy", null, PracownicyTab, null);
+		PracownicyTab.setLayout(null);
+		
+		
+		
+////////////////////////////////	Pracownicy TAB		
+		
+		
+		table = new JTable();
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 71, 1051, 431);
+		scrollPane.setViewportView(table);
+		PracownicyTab.add(scrollPane);
+		
 		
 		JButton btnSzukaj = new JButton("Szukaj");
-		btnSzukaj.setBounds(1089, 15, 98, 38);
 		btnSzukaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-		
+				
 				try{
-					//pobierz nazwisko z nazwiskoTextField
-					// sprawdzanie czy nie ma tam tekstu z ficzera
-					//gdy jest zamienia na pustego stringa
+					//pobierz nazwisko z nazwiskoTextField, sprawdzanie czy nie ma tam tekstu z ficzera, gdy jest zamienia na pustego stringa
 					String nazwisko = nazwiskoTextField.getText();
 					if(nazwiskoTextField.getText().equals("Nazwisko")){
-						
 						nazwisko= "";
 					}
 					
 					String stanowisko = stanowiskoTextField.getText();
 					if(stanowiskoTextField.getText().equals("Stanowisko")){
-						
 						stanowisko = "";
 					}
 					
 					String imie = imieTextField.getText();
 					if(imieTextField.getText().equals("Imie")){
-						
 						imie = "";
 					}
 					
 					String ulica = ulicaTextField.getText();
 					if(ulicaTextField.getText().equals("Ulica")){
-						
 						ulica = "";
 					}
 					
 					String miejscowosc = miejscowoscTextField.getText();
 					if(miejscowoscTextField.getText().equals("Miejscowosc")){
-						
 						miejscowosc = "";
 					}
 					
 					String pesel = peselTextField.getText();
 					if(peselTextField.getText().equals("Pesel")){
-						
 						pesel = "";
 					}
 					
 					String nrTel = nrTelTextField.getText();
 					if(nrTelTextField.getText().equals("Nr Tel")){
-						
 						nrTel = "";
 					}
 					
 					String nrKonta = nrKontaTextField.getText();
 					if(nrKontaTextField.getText().equals("Nr Konta")){
-						
 						nrKonta = "";
 					}
 					
@@ -144,18 +160,8 @@ public class PracownikSearch extends JFrame {
 					List<Pracownik> listaPracownikow = null;
 					
 					//wywolaj DAO i pobierz pracownikow o szukanym nazwisku
-					
-					
 					listaPracownikow = pracownikDao.szukajPracownik(nazwisko, stanowisko, imie, ulica, miejscowosc, pesel, nrKonta, nrTel);
-							
-					//jesli nazwiskoTextField jest puste to lista wszystkich pracownikow
-//					if(nazwisko != null ){
-//						listaPracownikow = pracownikDao.szukajPracownik(nazwisko, stanowisko);
-//					}
-//					else{
-//						listaPracownikow = pracownikDao.getAllPracownik();
-//					}
-					
+
 					//wyswietl liste
 					for(Pracownik temp: listaPracownikow){
 						System.out.println(temp);
@@ -164,28 +170,29 @@ public class PracownikSearch extends JFrame {
 					//stworz model i odswiez tabele, wyswietl liste
 					PracownikModelTabeli pracownikModel = new PracownikModelTabeli(listaPracownikow);
 					table.setModel(pracownikModel);
-					
-					
-					
+
 				}catch(Exception e){
-					JOptionPane.showMessageDialog(PracownikSearch.this, "Error: " + e, "Error", JOptionPane.ERROR_MESSAGE); 
+					JOptionPane.showMessageDialog(Main.this, "Error: " + e, "Error", JOptionPane.ERROR_MESSAGE);
+					System.err.println("B³¹d przy wyszukiwaniu: ");
+					System.err.println(e);
 				}
 				
 			}
 		});
-		contentPane.setLayout(null);
+		btnSzukaj.setBounds(1098, 22, 89, 23);
+		PracownicyTab.add(btnSzukaj);
 		
+
 		nazwiskoTextField = new JTextField();
 		nazwiskoTextField.setForeground(Color.GRAY);
 		nazwiskoTextField.setToolTipText("Nazwisko");
 		nazwiskoTextField.setText("Nazwisko");
 		nazwiskoTextField.setBounds(15, 23, 120, 20);
-		contentPane.add(nazwiskoTextField);
+		PracownicyTab.add(nazwiskoTextField);
 		nazwiskoTextField.setColumns(10);
-		contentPane.add(btnSzukaj);
+		PracownicyTab.add(btnSzukaj);
 		
-		//po kilkieciu w okienko wpisywania usuwa tekst
-		//a gdy niczego nie wpisalismy, wpisuje ponownie podpowiedz
+		//po kilkieciu w okienko wpisywania usuwa tekst, a gdy niczego nie wpisalismy, wpisuje ponownie podpowiedz
 	    nazwiskoTextField.addFocusListener(new FocusListener(){
 	    	
 	        public void focusGained(FocusEvent e){
@@ -193,7 +200,6 @@ public class PracownikSearch extends JFrame {
 	        		nazwiskoTextField.setText(null);
 	        		nazwiskoTextField.setForeground(Color.BLACK);
 			     }
-	            
 	        }
 
 			public void focusLost(FocusEvent e) {
@@ -204,37 +210,27 @@ public class PracownikSearch extends JFrame {
 			}
 	    });
 		
-		
-		table = new JTable();
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(15, 71, 1047, 453);
-		scrollPane.setViewportView(table);
-		contentPane.add(scrollPane);
-		
 		JButton btnDodaj = new JButton("Dodaj");
 		btnDodaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//stworz okienko
-				PracownikDialog okienko = new PracownikDialog(pracownikDao, PracownikSearch.this);
+				PracownikDialog okienko = new PracownikDialog(pracownikDao, Main.this);
 				okienko.setLocationRelativeTo(null);
 				okienko.setResizable(false);
-				
-				
+
 				//pokaz okienko
-				okienko.setVisible(true);
-				
-				
+				okienko.setVisible(true);	
 			}
 		});
 		btnDodaj.setBounds(1089, 109, 98, 38);
-		contentPane.add(btnDodaj);
+		PracownicyTab.add(btnDodaj);
 		
 		stanowiskoTextField = new JTextField();
 		stanowiskoTextField.setForeground(Color.GRAY);
 		stanowiskoTextField.setToolTipText("Stanowisko");
 		stanowiskoTextField.setText("Stanowisko");
 		stanowiskoTextField.setBounds(279, 23, 120, 20);
-		contentPane.add(stanowiskoTextField);
+		PracownicyTab.add(stanowiskoTextField);
 		stanowiskoTextField.setColumns(10);
 		
 	    stanowiskoTextField.addFocusListener(new FocusListener(){
@@ -244,7 +240,6 @@ public class PracownikSearch extends JFrame {
 	        		stanowiskoTextField.setText(null);
 	        		stanowiskoTextField.setForeground(Color.BLACK);
 			     }
-	            
 	        }
 
 			public void focusLost(FocusEvent e) {
@@ -260,7 +255,7 @@ public class PracownikSearch extends JFrame {
 		imieTextField.setToolTipText("Imie");
 		imieTextField.setText("Imie");
 		imieTextField.setBounds(147, 23, 120, 20);
-		contentPane.add(imieTextField);
+		PracownicyTab.add(imieTextField);
 		imieTextField.setColumns(10);
 		
 		imieTextField.addFocusListener(new FocusListener(){
@@ -286,7 +281,7 @@ public class PracownikSearch extends JFrame {
 		ulicaTextField.setToolTipText("Ulica");
 		ulicaTextField.setText("Ulica");
 		ulicaTextField.setBounds(413, 23, 120, 20);
-		contentPane.add(ulicaTextField);
+		PracownicyTab.add(ulicaTextField);
 		ulicaTextField.setColumns(10);
 		
 		ulicaTextField.addFocusListener(new FocusListener(){
@@ -312,7 +307,7 @@ public class PracownikSearch extends JFrame {
 		miejscowoscTextField.setToolTipText("Miejscowosc");
 		miejscowoscTextField.setText("Miejscowosc");
 		miejscowoscTextField.setBounds(545, 23, 120, 20);
-		contentPane.add(miejscowoscTextField);
+		PracownicyTab.add(miejscowoscTextField);
 		miejscowoscTextField.setColumns(10);
 		
 	    miejscowoscTextField.addFocusListener(new FocusListener(){
@@ -337,7 +332,7 @@ public class PracownikSearch extends JFrame {
 		peselTextField.setToolTipText("Pesel");
 		peselTextField.setText("Pesel");
 		peselTextField.setBounds(677, 23, 120, 20);
-		contentPane.add(peselTextField);
+		PracownicyTab.add(peselTextField);
 		peselTextField.setColumns(10);
 		
 		peselTextField.addFocusListener(new FocusListener(){
@@ -363,7 +358,7 @@ public class PracownikSearch extends JFrame {
 		nrKontaTextField.setToolTipText("Nr Konta");
 		nrKontaTextField.setText("Nr Konta");
 		nrKontaTextField.setBounds(809, 23, 120, 20);
-		contentPane.add(nrKontaTextField);
+		PracownicyTab.add(nrKontaTextField);
 		nrKontaTextField.setColumns(10);
 		
 		nrKontaTextField.addFocusListener(new FocusListener(){
@@ -373,7 +368,6 @@ public class PracownikSearch extends JFrame {
 	        		nrKontaTextField.setText(null);
 	        		nrKontaTextField.setForeground(Color.BLACK);
 			     }
-	            
 	        }
 
 			public void focusLost(FocusEvent e) {
@@ -389,7 +383,7 @@ public class PracownikSearch extends JFrame {
 		nrTelTextField.setToolTipText("Nr Tel");
 		nrTelTextField.setText("Nr Tel");
 		nrTelTextField.setBounds(941, 23, 120, 20);
-		contentPane.add(nrTelTextField);
+		PracownicyTab.add(nrTelTextField);
 		nrTelTextField.setColumns(10);
 		
 		nrTelTextField.addFocusListener(new FocusListener(){
@@ -399,7 +393,6 @@ public class PracownikSearch extends JFrame {
 	        		nrTelTextField.setText(null);
 	        		nrTelTextField.setForeground(Color.BLACK);
 			     }
-	            
 	        }
 
 			public void focusLost(FocusEvent e) {
@@ -421,7 +414,7 @@ public class PracownikSearch extends JFrame {
 				
 				//sprawdz czy jest zaznaczony pracownik
 				if(row<0){
-					JOptionPane.showMessageDialog(PracownikSearch.this, "Musisz zaznaczyc pracownika", "BLAD", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(Main.this, "Musisz zaznaczyc pracownika", "BLAD", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				
@@ -429,17 +422,16 @@ public class PracownikSearch extends JFrame {
 				Pracownik tempPracownik = (Pracownik) table.getValueAt(row, PracownikModelTabeli.OBJECT_COL);
 				
 				//stworz okienko
-				PracownikDialog okienko = new PracownikDialog(pracownikDao, PracownikSearch.this, tempPracownik, true);
+				PracownikDialog okienko = new PracownikDialog(pracownikDao, Main.this, tempPracownik, true);
 				okienko.setLocationRelativeTo(null);
 				okienko.setResizable(false);
+				
 				//pokaz okienko
 				okienko.setVisible(true);
-				
-				
 			}
 		});
 		btnEdytuj.setBounds(1089, 159, 98, 38);
-		contentPane.add(btnEdytuj);
+		PracownicyTab.add(btnEdytuj);
 		
 		btnUsun = new JButton("Usun");
 		btnUsun.addActionListener(new ActionListener() {
@@ -451,12 +443,12 @@ public class PracownikSearch extends JFrame {
 					
 					//sprawdz czy jest zaznaczony pracownik
 					if(row<0){
-						JOptionPane.showMessageDialog(PracownikSearch.this, "Musisz zaznaczyc pracownika", "BLAD", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(Main.this, "Musisz zaznaczyc pracownika", "BLAD", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 					
 					//potwierdzenie od uzytkownika
-					int odpowiedz = JOptionPane.showConfirmDialog(PracownikSearch.this, "Usunac pracownika?",
+					int odpowiedz = JOptionPane.showConfirmDialog(Main.this, "Usunac pracownika?",
 							"Potwierdz", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 					if(odpowiedz != JOptionPane.YES_OPTION){
 						return;
@@ -472,20 +464,24 @@ public class PracownikSearch extends JFrame {
 					odswierzListePracownikow();
 					
 					//wyswietl potwierdzenie
-					JOptionPane.showMessageDialog(PracownikSearch.this, "Pracownik usuniï¿½ty", "Usunieto", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(Main.this, "Pracownik usuniï¿½ty", "Usunieto", JOptionPane.INFORMATION_MESSAGE);
 					
 				}catch(Exception ex){
-					JOptionPane.showMessageDialog(PracownikSearch.this, "Blad przy usuwaniu pracownika: " + ex.getMessage(), "BLAD", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(Main.this, "Blad przy usuwaniu pracownika: " + ex.getMessage(), "BLAD", JOptionPane.ERROR_MESSAGE);
+					System.err.println("Blad przy usuwaniu pracownika: " + ex.getMessage());
 					
 				}
-				
-				
+
 			}
 		});
 		btnUsun.setBounds(1089, 209, 98, 38);
-		contentPane.add(btnUsun);
+		PracownicyTab.add(btnUsun);
+//////////////////////////// koniec PracownicyTab
+		
+		
 		
 	}
+	
 	
 	
 	public void odswierzListePracownikow() {
@@ -504,4 +500,6 @@ public class PracownikSearch extends JFrame {
 		}
 		
 	}
+	
+	
 }

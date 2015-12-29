@@ -1,4 +1,4 @@
-package ui;
+package modeleTabel;
 
 import java.util.List;
 

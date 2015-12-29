@@ -180,7 +180,7 @@ public class Pracownik {
 
 	@Override
 	public String toString() {
-		return "Pracownik [id=" + id + ", imie=" + imie + ", nazwisko=" + nazwisko + ", pesel=" + pesel + ", ulica="
+		return "\nPracownik [id=" + id + ", imie=" + imie + ", nazwisko=" + nazwisko + ", pesel=" + pesel + ", ulica="
 				+ ulica + ", miejscowosc=" + miejscowosc + ", stanowisko=" + stanowisko + ", nrKonta=" + nrKonta
 				+ ", nrTelefonu=" + nrTelefonu + "]";
 	}

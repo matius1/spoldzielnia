@@ -65,9 +65,26 @@ public class Wlasciciel {
 		this.nrTelefonu = nrTelefonu;
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	public Wlasciciel(String imie, String nazwisko, String pesel, String ulica, String miejscowosc, String nrTelefonu) {
+		super();
+		this.imie = imie;
+		this.nazwisko = nazwisko;
+		this.pesel = pesel;
+		this.ulica = ulica;
+		this.miejscowosc = miejscowosc;
+		this.nrTelefonu = nrTelefonu;
+	}
 	@Override
 	public String toString() {
-		return "Wlasciciel [id=" + id + ", imie=" + imie + ", nazwisko=" + nazwisko + ", pesel=" + pesel + ", ulica="
+		return "\nWlasciciel [id=" + id + ", imie=" + imie + ", nazwisko=" + nazwisko + ", pesel=" + pesel + ", ulica="
 				+ ulica + ", miejscowosc=" + miejscowosc + ", nrTelefonu=" + nrTelefonu + "]";
 	}
 	

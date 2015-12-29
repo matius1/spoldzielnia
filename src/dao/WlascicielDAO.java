@@ -147,6 +147,35 @@ public class WlascicielDAO {
 	
 	
 	
+	
+	public void edytujWlasciciel(Wlasciciel wlasciciel) throws SQLException{
+		PreparedStatement myStmt = null;
+		
+		try {
+			myStmt = myConn.prepareStatement("update wlasciciel "
+					+ "set imie=?, nazwisko=?, pesel=?, ulica=?, miejscowosc=?, nr_telefonu=? where id=?");
+					
+			myStmt.setString(1, wlasciciel.getImie());
+			myStmt.setString(2, wlasciciel.getNazwisko());
+			myStmt.setString(3, wlasciciel.getPesel());
+			myStmt.setString(4, wlasciciel.getUlica());
+			myStmt.setString(5, wlasciciel.getMiejscowosc());
+			myStmt.setString(6, wlasciciel.getNrTelefonu());
+			myStmt.setInt(7, wlasciciel.getId());
+			
+			myStmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(myStmt);
+		}
+		
+	}
+	
+	
+	
 	public void addWlasciciel(Wlasciciel wlasciciel) throws SQLException {
 			
 			PreparedStatement myStmt = null;
@@ -155,15 +184,15 @@ public class WlascicielDAO {
 			try {
 				myStmt = myConn.prepareStatement("insert into wlasciciel"
 						+ " (id, imie, nazwisko, pesel, ulica, miejscowosc, nr_telefonu)"
-						+ " values (?, ?, ?, ?, ?, ?)");
+						+ " values (NULL, ?, ?, ?, ?, ?, ?)");
 	
-				myStmt.setInt(1, wlasciciel.getId());
-				myStmt.setString(2, wlasciciel.getImie());
-				myStmt.setString(3, wlasciciel.getNazwisko());
-				myStmt.setString(4, wlasciciel.getPesel());
-				myStmt.setString(5, wlasciciel.getUlica());
-				myStmt.setString(6, wlasciciel.getMiejscowosc());
-				myStmt.setString(7, wlasciciel.getNrTelefonu());
+			
+				myStmt.setString(1, wlasciciel.getImie());
+				myStmt.setString(2, wlasciciel.getNazwisko());
+				myStmt.setString(3, wlasciciel.getPesel());
+				myStmt.setString(4, wlasciciel.getUlica());
+				myStmt.setString(5, wlasciciel.getMiejscowosc());
+				myStmt.setString(6, wlasciciel.getNrTelefonu());
 				
 				myStmt.executeUpdate();
 				

@@ -652,7 +652,7 @@ public class Main extends JFrame {
 
 				try{
 					//pobierz numer wiersza
-					int row = table.getSelectedRow();
+					int row = tableW.getSelectedRow();
 					
 					//sprawdz czy jest zaznaczony wlasciciel
 					if(row<0){
@@ -669,21 +669,21 @@ public class Main extends JFrame {
 					
 					//pobierz zaznaczonego wlasciciela
 //					Pracownik tempPracownik = (Pracownik) table.getValueAt(row, PracownikModelTabeli.OBJECT_COL);
-					Wlasciciel tempWlasciciel = (Wlasciciel) table.getValueAt(row, WlascicielModelTabeli.OBJECT_COL);
+					Wlasciciel tempWlasciciel = (Wlasciciel) tableW.getValueAt(row, WlascicielModelTabeli.OBJECT_COL);
 					
 					//usun pracownika
 //					pracownikDao.usunPracowni(tempPracownik.getId());
-//					wlascicielDao.usunWlasciciel(BigInteger(tempWlasciciel.getPesel()));
+					wlascicielDao.usunWlasciciel(tempWlasciciel.getId());
 					
 					//odswierz liste
-					odswierzListePracownikow();
+					odswierzListeWlascicieli();
 					
 					//wyswietl potwierdzenie
-					JOptionPane.showMessageDialog(Main.this, "Pracownik usuniï¿½ty", "Usunieto", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(Main.this, "Wlasciciel usuniêty", "Usunieto", JOptionPane.INFORMATION_MESSAGE);
 					
 				}catch(Exception ex){
-					JOptionPane.showMessageDialog(Main.this, "Blad przy usuwaniu pracownika: " + ex.getMessage(), "BLAD", JOptionPane.ERROR_MESSAGE);
-					System.err.println("Blad przy usuwaniu pracownika: " + ex.getMessage());
+					JOptionPane.showMessageDialog(Main.this, "Blad przy usuwaniu Wlasciciela: " + ex.getMessage(), "BLAD", JOptionPane.ERROR_MESSAGE);
+					System.err.println("Blad przy usuwaniu wlasciciela: " + ex.getMessage());
 					
 				}
 				
@@ -730,7 +730,7 @@ public class Main extends JFrame {
 			// stworz model i odswierz tabele
 			WlascicielModelTabeli model = new WlascicielModelTabeli(wlasciciele);
 
-			table.setModel(model);
+			tableW.setModel(model);
 			
 		} catch (Exception exc) {
 			JOptionPane.showMessageDialog(this, "BLAD: " + exc, "BLAD",

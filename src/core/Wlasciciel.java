@@ -9,24 +9,12 @@ public class Wlasciciel {
 	private String ulica;
 	private String miejscowosc;
 	private String nrTelefonu;
-	
-	
-	
-	
-	
-	
-	public Wlasciciel(String imie, String nazwisko, String pesel, String ulica, String miejscowosc,
-			String nrTelefonu) {
-		super();
-		this.imie = imie;
-		this.nazwisko = nazwisko;
-		this.pesel = pesel;
-		this.ulica = ulica;
-		this.miejscowosc = miejscowosc;
-		this.nrTelefonu = nrTelefonu;
+	public int getId() {
+		return id;
 	}
-	
-
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getImie() {
 		return imie;
 	}
@@ -63,13 +51,28 @@ public class Wlasciciel {
 	public void setNrTelefonu(String nrTelefonu) {
 		this.nrTelefonu = nrTelefonu;
 	}
-
-
+	
+	
+	public Wlasciciel(int id, String imie, String nazwisko, String pesel, String ulica, String miejscowosc,
+			String nrTelefonu) {
+		super();
+		this.id = id;
+		this.imie = imie;
+		this.nazwisko = nazwisko;
+		this.pesel = pesel;
+		this.ulica = ulica;
+		this.miejscowosc = miejscowosc;
+		this.nrTelefonu = nrTelefonu;
+	}
+	
 	@Override
 	public String toString() {
-		return "Wlasciciel [imie=" + imie + ", nazwisko=" + nazwisko + ", pesel=" + pesel + ", ulica="
+		return "Wlasciciel [id=" + id + ", imie=" + imie + ", nazwisko=" + nazwisko + ", pesel=" + pesel + ", ulica="
 				+ ulica + ", miejscowosc=" + miejscowosc + ", nrTelefonu=" + nrTelefonu + "]";
 	}
+	
+	
+	
 	
 	
 	

@@ -154,15 +154,16 @@ public class WlascicielDAO {
 			//
 			try {
 				myStmt = myConn.prepareStatement("insert into wlasciciel"
-						+ " (imie, nazwisko, pesel, ulica, miejscowosc, nr_telefonu)"
+						+ " (id, imie, nazwisko, pesel, ulica, miejscowosc, nr_telefonu)"
 						+ " values (?, ?, ?, ?, ?, ?)");
 	
-				myStmt.setString(1, wlasciciel.getImie());
-				myStmt.setString(2, wlasciciel.getNazwisko());
-				myStmt.setString(3, wlasciciel.getPesel());
-				myStmt.setString(4, wlasciciel.getUlica());
-				myStmt.setString(5, wlasciciel.getMiejscowosc());
-				myStmt.setString(6, wlasciciel.getNrTelefonu());
+				myStmt.setInt(1, wlasciciel.getId());
+				myStmt.setString(2, wlasciciel.getImie());
+				myStmt.setString(3, wlasciciel.getNazwisko());
+				myStmt.setString(4, wlasciciel.getPesel());
+				myStmt.setString(5, wlasciciel.getUlica());
+				myStmt.setString(6, wlasciciel.getMiejscowosc());
+				myStmt.setString(7, wlasciciel.getNrTelefonu());
 				
 				myStmt.executeUpdate();
 				
@@ -174,13 +175,14 @@ public class WlascicielDAO {
 			}
 	}
 	
-	public void usunWlasciciel(int wlascicielPesel) throws SQLException{
+	public void usunWlasciciel(int wlascicielID) throws SQLException{
 		PreparedStatement myStmt = null;
 		
 		try {
-			myStmt = myConn.prepareStatement("delete from wlasciciel where pesel=?");
+			myStmt = myConn.prepareStatement("delete from wlasciciel where id=?");
+			System.err.println("Usunieto wlasciciela id: " + wlascicielID);
 					
-			myStmt.setInt(1, wlascicielPesel);
+			myStmt.setInt(1, wlascicielID);
 			myStmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -194,15 +196,16 @@ public class WlascicielDAO {
 
 	private Wlasciciel convertRowToWlasciciel(ResultSet myRs) throws SQLException {
 
+		int id = myRs.getInt("id");
 		String imie = myRs.getString("imie");
 		String nazwisko = myRs.getString("nazwisko");
 		String pesel = myRs.getString("pesel");
 		String ulica = myRs.getString("ulica");
 		String miejscowosc = myRs.getString("miejscowosc");
 		String nrTelefonu = myRs.getString("nr_telefonu");
+		
 
-		Wlasciciel tempWlasciciel = new Wlasciciel(imie, nazwisko, pesel, ulica, miejscowosc, nrTelefonu);
-
+		Wlasciciel tempWlasciciel = new Wlasciciel(id, imie, nazwisko, pesel, ulica, miejscowosc, nrTelefonu);
 		return tempWlasciciel;
 
 	}//

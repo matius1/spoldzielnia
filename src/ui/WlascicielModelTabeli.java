@@ -15,14 +15,15 @@ public class WlascicielModelTabeli extends AbstractTableModel {
 	 */
 	private static final long serialVersionUID = 1L;
 	public static final int OBJECT_COL = -1;
-	public static final int NAZWISKO_COL = 0;
-	public static final int IMIE_COL = 1;
-	public static final int PESEL_COL = 2;
-	public static final int ULICA_COL = 3;
-	public static final int MIEJSCOWOSC_COL = 4;
-	public static final int NR_TEL_COL = 5;
+	public static final int ID_COL = 0;
+	public static final int NAZWISKO_COL = 1;
+	public static final int IMIE_COL = 2;
+	public static final int PESEL_COL = 3;
+	public static final int ULICA_COL = 4;
+	public static final int MIEJSCOWOSC_COL = 5;
+	public static final int NR_TEL_COL = 6;
 	
-	private String[] columnNames = { "Nazwisko" ,"Imie", "Pesel", "Ulica", "Miejscowosc", "Nr Telefonu" };
+	private String[] columnNames = { "ID", "Nazwisko" ,"Imie", "Pesel", "Ulica", "Miejscowosc", "Nr Telefonu" };
 
 	private List<Wlasciciel> wlasciciele;
 	
@@ -52,7 +53,8 @@ public class WlascicielModelTabeli extends AbstractTableModel {
 
 		Wlasciciel tempWlasciciel = wlasciciele.get(rowIndex);
 		switch(columnIndex){
-		
+		case ID_COL:
+			return tempWlasciciel.getId();
 		case NAZWISKO_COL:
 			return tempWlasciciel.getNazwisko();
 		case IMIE_COL:

@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Czas generowania: 14 Gru 2015, 16:19
--- Wersja serwera: 10.1.8-MariaDB
--- Wersja PHP: 5.6.14
+-- Czas generowania: 29 Gru 2015, 08:12
+-- Wersja serwera: 10.1.9-MariaDB
+-- Wersja PHP: 5.6.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -64,26 +64,24 @@ CREATE TABLE `mieszkanie` (
 --
 
 INSERT INTO `mieszkanie` (`id_mieszkania`, `id_bloku`, `nr_mieszkania`, `pietro`, `powierzchnia`, `ilosc_pokoi`, `piwnica_powierzchnia`) VALUES
-(1, 1, 1, 1, 50, 3, 14),
-(2, 1, 2, 1, 66, 2, 22),
-(3, 1, 2, 1, 40, 2, 12),
-(4, 1, 2, 1, 40, 2, 12),
-(5, 1, 3, 2, 44, 2, 12),
-(6, 1, 2, 1, 40, 2, 12),
-(7, 1, 3, 2, 44, 2, 12),
-(8, 1, 4, 2, 40, 2, 12),
-(9, 1, 5, 3, 44, 2, 12),
-(10, 1, 6, 3, 40, 2, 12),
-(11, 2, 2, 1, 50, 3, 9),
-(12, 2, 3, 2, 54, 3, 9),
-(13, 2, 4, 2, 50, 3, 9),
-(14, 2, 5, 3, 54, 3, 9),
-(15, 2, 6, 3, 50, 3, 9),
-(16, 3, 2, 1, 30, 2, 5),
-(17, 3, 3, 2, 34, 2, 5),
-(18, 3, 4, 2, 30, 2, 5),
-(19, 3, 5, 3, 34, 2, 5),
-(20, 3, 6, 3, 30, 2, 5);
+(10, 1, 1, 1, 42, 2, 12),
+(11, 1, 2, 1, 42, 2, 12),
+(12, 1, 3, 2, 52, 3, 12),
+(13, 1, 4, 2, 52, 3, 12),
+(14, 1, 5, 3, 62, 3, 12),
+(15, 1, 6, 3, 44, 3, 12),
+(16, 2, 1, 1, 42, 2, 14),
+(17, 2, 2, 1, 42, 2, 14),
+(18, 2, 3, 2, 52, 3, 14),
+(19, 2, 4, 2, 52, 3, 14),
+(20, 2, 5, 3, 62, 3, 14),
+(21, 2, 6, 3, 44, 3, 14),
+(22, 3, 1, 1, 42, 2, 16),
+(23, 3, 2, 1, 42, 2, 16),
+(24, 3, 3, 2, 52, 3, 16),
+(25, 3, 4, 2, 52, 3, 16),
+(26, 3, 5, 3, 62, 3, 16),
+(27, 3, 6, 3, 44, 3, 16);
 
 -- --------------------------------------------------------
 
@@ -92,40 +90,38 @@ INSERT INTO `mieszkanie` (`id_mieszkania`, `id_bloku`, `nr_mieszkania`, `pietro`
 --
 
 CREATE TABLE `oplaty` (
+  `id_oplat` int(10) NOT NULL,
   `id_mieszkania` int(10) NOT NULL,
   `czynsz` float NOT NULL,
   `prad` float NOT NULL,
   `woda` float NOT NULL,
   `gaz` float NOT NULL,
-  `remontowe` float NOT NULL
+  `ramontowe` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `oplaty`
 --
 
-INSERT INTO `oplaty` (`id_mieszkania`, `czynsz`, `prad`, `woda`, `gaz`, `remontowe`) VALUES
-(1, 500, 122, 88, 52, 23),
-(1, 500, 122, 88, 52, 23),
-(2, 500, 122, 88, 52, 23),
-(3, 500, 122, 88, 52, 23),
-(4, 500, 122, 88, 52, 23),
-(5, 500, 122, 88, 52, 23),
-(6, 500, 122, 88, 52, 23),
-(7, 500, 122, 88, 52, 23),
-(8, 500, 122, 88, 52, 23),
-(9, 500, 122, 88, 52, 23),
-(10, 500, 122, 88, 52, 23),
-(11, 500, 122, 88, 52, 23),
-(12, 500, 122, 88, 52, 23),
-(13, 500, 122, 88, 52, 23),
-(14, 500, 122, 88, 52, 23),
-(15, 500, 122, 88, 52, 23),
-(16, 500, 122, 88, 52, 23),
-(17, 500, 122, 88, 52, 23),
-(18, 500, 122, 88, 52, 23),
-(19, 500, 122, 88, 52, 23),
-(20, 500, 122, 88, 52, 23);
+INSERT INTO `oplaty` (`id_oplat`, `id_mieszkania`, `czynsz`, `prad`, `woda`, `gaz`, `ramontowe`) VALUES
+(3, 10, 500, 122, 88, 52, 23),
+(4, 11, 500, 122, 88, 52, 23),
+(5, 12, 500, 122, 88, 52, 23),
+(6, 13, 500, 122, 88, 52, 23),
+(7, 14, 500, 122, 88, 52, 23),
+(8, 15, 500, 122, 88, 52, 23),
+(9, 16, 500, 122, 88, 52, 23),
+(10, 17, 500, 122, 88, 52, 23),
+(11, 18, 500, 122, 88, 52, 23),
+(12, 19, 500, 122, 88, 52, 23),
+(13, 20, 500, 122, 88, 52, 23),
+(14, 21, 500, 122, 88, 52, 23),
+(15, 22, 500, 122, 88, 52, 23),
+(16, 23, 500, 122, 88, 52, 23),
+(17, 24, 500, 122, 88, 52, 23),
+(18, 25, 500, 122, 88, 52, 23),
+(19, 26, 500, 122, 88, 52, 23),
+(20, 27, 500, 122, 88, 52, 23);
 
 -- --------------------------------------------------------
 
@@ -152,9 +148,8 @@ CREATE TABLE `pracownik` (
 
 INSERT INTO `pracownik` (`id`, `imie`, `nazwisko`, `pesel`, `ulica`, `miejscowosc`, `stanowisko`, `nr_konta`, `nr_telefonu`, `nazwa_spoldzielni_fk`) VALUES
 (1, 'Krzysztof', 'Pezi', 93103336358, 'Chmieleniec 1', 'Krakow', 'Prezes', 0, 666777888, 'Stonka'),
-(2, 'Mateusz', 'Fajny', 93661236258, 'Warszawska 1', 'Krakow', 'Vice Prezes', 22, 456789123, 'Stonka'),
 (6, 'Katarzyna', 'Grzyb', 89141236258, 'Morska 11', 'Krakow', 'Sekretarka', 9223372036854775807, 996789123, 'Stonka'),
-(7, 'Dominik', 'Kowalski', 92011236258, 'Komorowskiego 21', 'Krakow', 'Maanager', 12000034000060022, 147258369, 'Stonka');
+(7, 'Dominika', 'Kowalska', 92011236258, 'Komorowskiego 21', 'Krakow', 'Maanager', 12000034000060022, 147258369, 'Stonka');
 
 -- --------------------------------------------------------
 
@@ -163,6 +158,7 @@ INSERT INTO `pracownik` (`id`, `imie`, `nazwisko`, `pesel`, `ulica`, `miejscowos
 --
 
 CREATE TABLE `remont` (
+  `id_remont` int(10) NOT NULL,
   `opis` varchar(255) NOT NULL,
   `kwota` float NOT NULL,
   `id_bloku` int(10) NOT NULL
@@ -194,6 +190,7 @@ INSERT INTO `spoldzielnia_mieszkaniowa` (`nazwa_spoldzielni`, `adres_spoldzielni
 
 CREATE TABLE `wlasciciel` (
   `pesel` bigint(11) NOT NULL,
+  `id` int(10) NOT NULL,
   `imie` varchar(25) NOT NULL,
   `nazwisko` varchar(25) NOT NULL,
   `ulica` varchar(25) NOT NULL,
@@ -205,13 +202,13 @@ CREATE TABLE `wlasciciel` (
 -- Zrzut danych tabeli `wlasciciel`
 --
 
-INSERT INTO `wlasciciel` (`pesel`, `imie`, `nazwisko`, `ulica`, `miejscowosc`, `nr_telefonu`) VALUES
-(89551415963, 'Alicja', 'Zlopek', 'Straszna 1', 'Krakow', 458729963),
-(92551415000, 'Kali', 'Brow', 'Zycia 2', 'Krakow', 123789963),
-(92551415963, 'Anna', 'Popek', 'Moneta 18', 'Krakow', 456789963),
-(92551488963, 'Tadeusz', 'Paluch', 'Patologa 8', 'Krakow', 455555963),
-(92889415963, 'Alibaba', 'Rozbujnik', 'Dzina 1', 'Krakow', 969789963),
-(93103336358, 'Mateusz', 'Skocz', 'Pilsudskiego 1', 'Skawina', 666777888);
+INSERT INTO `wlasciciel` (`pesel`, `id`, `imie`, `nazwisko`, `ulica`, `miejscowosc`, `nr_telefonu`) VALUES
+(93100104147, 1, 'mateusz', 'Skocz', 'Pilsudskiego 18', 'Skawina', 654789123),
+(89551415963, 3, 'Alicja', 'Zlopek', 'Straszna 1', 'Krakow', 458729963),
+(92551415000, 4, 'Kali', 'Brow', 'Zycia 2', 'Krakow', 123789963),
+(92551415963, 5, 'Anna', 'Popek', 'Moneta 18', 'Krakow', 456789963),
+(92551488963, 6, 'Tadeusz', 'Paluch', 'Patologa 8', 'Krakow', 455555963),
+(92889415963, 7, 'Alibaba', 'Rozbujnik', 'Dzina 1', 'Krakow', 969789963);
 
 -- --------------------------------------------------------
 
@@ -220,31 +217,23 @@ INSERT INTO `wlasciciel` (`pesel`, `imie`, `nazwisko`, `ulica`, `miejscowosc`, `
 --
 
 CREATE TABLE `wlasciciel_mieszkanie` (
-  `wlasciciel_pesel` bigint(11) NOT NULL,
-  `mieszkanie_id` int(10) NOT NULL
+  `wlasciciel_id` int(10) DEFAULT NULL,
+  `mieszkanie_id` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `wlasciciel_mieszkanie`
 --
 
-INSERT INTO `wlasciciel_mieszkanie` (`wlasciciel_pesel`, `mieszkanie_id`) VALUES
-(93103336358, 1),
-(89551415963, 5),
-(92551415000, 6),
-(89551415963, 5),
-(92551415000, 6),
-(92551415963, 10),
-(92551488963, 7),
-(92551415963, 10),
-(92551488963, 7),
-(92889415963, 16),
-(93103336358, 17),
-(92889415963, 16),
-(93103336358, 17);
+INSERT INTO `wlasciciel_mieszkanie` (`wlasciciel_id`, `mieszkanie_id`) VALUES
+(3, 11),
+(4, 12),
+(5, 13),
+(6, 14),
+(7, 15);
 
 --
--- Indeksy dla zrzutÃ³w tabel
+-- Indeksy dla zrzutów tabel
 --
 
 --
@@ -261,14 +250,15 @@ ALTER TABLE `blok`
 --
 ALTER TABLE `mieszkanie`
   ADD PRIMARY KEY (`id_mieszkania`),
-  ADD UNIQUE KEY `id_mieszkania` (`id_mieszkania`),
   ADD KEY `id_bloku` (`id_bloku`);
 
 --
 -- Indexes for table `oplaty`
 --
 ALTER TABLE `oplaty`
-  ADD KEY `id_mieszkania` (`id_mieszkania`);
+  ADD PRIMARY KEY (`id_oplat`),
+  ADD KEY `id_mieszkania` (`id_mieszkania`),
+  ADD KEY `id_mieszkania_2` (`id_mieszkania`);
 
 --
 -- Indexes for table `pracownik`
@@ -284,6 +274,7 @@ ALTER TABLE `pracownik`
 -- Indexes for table `remont`
 --
 ALTER TABLE `remont`
+  ADD PRIMARY KEY (`id_remont`),
   ADD KEY `id_bloku` (`id_bloku`);
 
 --
@@ -298,13 +289,14 @@ ALTER TABLE `spoldzielnia_mieszkaniowa`
 -- Indexes for table `wlasciciel`
 --
 ALTER TABLE `wlasciciel`
-  ADD PRIMARY KEY (`pesel`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
 
 --
 -- Indexes for table `wlasciciel_mieszkanie`
 --
 ALTER TABLE `wlasciciel_mieszkanie`
-  ADD KEY `wlasciciel_pesel` (`wlasciciel_pesel`),
+  ADD KEY `wlasciciel_id` (`wlasciciel_id`),
   ADD KEY `mieszkanie_id` (`mieszkanie_id`);
 
 --
@@ -320,14 +312,29 @@ ALTER TABLE `blok`
 -- AUTO_INCREMENT dla tabeli `mieszkanie`
 --
 ALTER TABLE `mieszkanie`
-  MODIFY `id_mieszkania` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_mieszkania` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+--
+-- AUTO_INCREMENT dla tabeli `oplaty`
+--
+ALTER TABLE `oplaty`
+  MODIFY `id_oplat` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT dla tabeli `pracownik`
 --
 ALTER TABLE `pracownik`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
--- Ograniczenia dla zrzutÃ³w tabel
+-- AUTO_INCREMENT dla tabeli `remont`
+--
+ALTER TABLE `remont`
+  MODIFY `id_remont` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT dla tabeli `wlasciciel`
+--
+ALTER TABLE `wlasciciel`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- Ograniczenia dla zrzutów tabel
 --
 
 --
@@ -340,13 +347,13 @@ ALTER TABLE `blok`
 -- Ograniczenia dla tabeli `mieszkanie`
 --
 ALTER TABLE `mieszkanie`
-  ADD CONSTRAINT `mieszkanie_blok_fk` FOREIGN KEY (`id_bloku`) REFERENCES `blok` (`id_bloku`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `mieszkanie_ibfk_2` FOREIGN KEY (`id_bloku`) REFERENCES `blok` (`id_bloku`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `oplaty`
 --
 ALTER TABLE `oplaty`
-  ADD CONSTRAINT `oplaty_mieszkanie_fk` FOREIGN KEY (`id_mieszkania`) REFERENCES `mieszkanie` (`id_mieszkania`);
+  ADD CONSTRAINT `oplaty_ibfk_1` FOREIGN KEY (`id_mieszkania`) REFERENCES `mieszkanie` (`id_mieszkania`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `pracownik`
@@ -364,8 +371,8 @@ ALTER TABLE `remont`
 -- Ograniczenia dla tabeli `wlasciciel_mieszkanie`
 --
 ALTER TABLE `wlasciciel_mieszkanie`
-  ADD CONSTRAINT `mieszkanie_wl-wl_fk` FOREIGN KEY (`wlasciciel_pesel`) REFERENCES `wlasciciel` (`pesel`),
-  ADD CONSTRAINT `mieszkanie_wlasciciel_miesz_fk` FOREIGN KEY (`mieszkanie_id`) REFERENCES `mieszkanie` (`id_mieszkania`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `wl-m_m-fk` FOREIGN KEY (`mieszkanie_id`) REFERENCES `mieszkanie` (`id_mieszkania`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `wlasciciel_mieszkanie_ibfk_1` FOREIGN KEY (`wlasciciel_id`) REFERENCES `wlasciciel` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

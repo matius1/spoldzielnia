@@ -1,7 +1,7 @@
 package ui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.AbstractButton;
@@ -10,8 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import core.Blok;
 import core.Pracownik;
@@ -29,12 +27,15 @@ import java.awt.GridLayout;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
@@ -68,7 +69,6 @@ public class Main extends JFrame {
 	private BlokDAO blokDao;
 
 	private JTextField nazwiskoWTextField;
-	private JScrollPane scrollPaneWlasciciele;
 	private JScrollPane scrollPaneWlasciciele_1;
 	private JTextField imieWTextField;
 	private JTextField peselWTextField;
@@ -80,7 +80,6 @@ public class Main extends JFrame {
 	private JButton btnUsunW;
 
 	private JScrollPane scrollPaneBloki_1;
-
 	private JButton btnDodajB;
 	private JButton btnEdytujB;
 	private AbstractButton btnUsunB;
@@ -88,6 +87,13 @@ public class Main extends JFrame {
 	private JTextField ulicaNrBTextField;
 	private JTextField miejscowoscBtextField;
 	private JTextField idBtextField;
+
+	private JScrollPane scrollPaneMieszkania;
+
+	private Component tableM;
+
+	private JTabbedPane tabbedPane;
+
 
 	/**
 	 * Launch the application.
@@ -115,6 +121,30 @@ public class Main extends JFrame {
 		pracownikDao = new PracownikDAO();
 		wlascicielDao = new WlascicielDAO();
 
+		
+		////  http://thebadprogrammer.com/swing-uimanager-keys/
+		
+		
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			UIManager.put("Table.selectionBackground", Color.ORANGE);
+			UIManager.put("Table.selectionForeground", Color.BLACK);
+			UIManager.put("TextField.background", Color.ORANGE);
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (InstantiationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IllegalAccessException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1230, 589);
 		contentPane = new JPanel();
@@ -122,7 +152,7 @@ public class Main extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(1, 0, 0, 0));
 
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane);
 
 		JPanel MenuTab = new JPanel();
@@ -133,8 +163,68 @@ public class Main extends JFrame {
 		lblWitaj.setBounds(358, 157, 46, 14);
 		MenuTab.add(lblWitaj);
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////// Pracownicy TAB
+		
+		zakladkaPracownicy();
+		
+		zakladkaWlasciciele();
 
+		zakladkaBloki();
+
+
+
+	}
+
+	public void odswierzListePracownikow() {
+
+		try {
+			List<Pracownik> pracownicy = pracownikDao.getAllPracownik();
+
+			// stworz model i odswierz tabele
+			PracownikModelTabeli model = new PracownikModelTabeli(pracownicy);
+
+			table.setModel(model);
+
+		} catch (Exception exc) {
+			JOptionPane.showMessageDialog(this, "BLAD: " + exc, "BLAD", JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
+
+	public void odswierzListeWlascicieli() {
+
+		try {
+			List<Wlasciciel> wlasciciele = wlascicielDao.getAllWlasciciel();
+
+			// stworz model i odswierz tabele
+			WlascicielModelTabeli model = new WlascicielModelTabeli(wlasciciele);
+
+			tableW.setModel(model);
+
+		} catch (Exception exc) {
+			JOptionPane.showMessageDialog(this, "BLAD: " + exc, "BLAD", JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
+
+	public void odswierzListeBlokow() {
+
+		try {
+			List<Blok> bloki = blokDao.getAllBlok();
+
+			// stworz model i odswierz tabele
+			BlokModelTabeli model = new BlokModelTabeli(bloki);
+
+			tableB.setModel(model);
+
+		} catch (Exception exc) {
+			JOptionPane.showMessageDialog(this, "BLAD: " + exc, "BLAD", JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
+	
+	
+	public void zakladkaPracownicy(){
+		
 		JPanel PracownicyTab = new JPanel();
 		tabbedPane.addTab("Pracownicy", null, PracownicyTab, null);
 		PracownicyTab.setLayout(null);
@@ -517,16 +607,17 @@ public class Main extends JFrame {
 		});
 		btnUsunP.setBounds(1089, 209, 98, 38);
 		PracownicyTab.add(btnUsunP);
-
-/////////////////////////////////////////////////////////////////////////////////////// koniec PracownicyTab
-
-////////////////////////////////////////////////////////////////////////////////////// Wlasciciele TAB
+		
+	}
+	
+	
+	public void zakladkaWlasciciele(){
+		
 		JPanel WlasicieleTab = new JPanel();
 		tabbedPane.addTab("Wlasciciele", null, WlasicieleTab, null);
 		WlasicieleTab.setLayout(null);
 
 		tableW = new JTable();
-		scrollPaneWlasciciele = new JScrollPane();
 		scrollPaneWlasciciele_1 = new JScrollPane();
 		scrollPaneWlasciciele_1.setBounds(35, 73, 1000, 390);
 		scrollPaneWlasciciele_1.setViewportView(tableW);
@@ -840,10 +931,9 @@ public class Main extends JFrame {
 		btnUsunW.setBounds(1081, 172, 89, 23);
 		WlasicieleTab.add(btnUsunW);
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////// koniec wlasciele TAB
+	}
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// Blok Tab
-
+	public void zakladkaBloki(){
 		JPanel BlokTab = new JPanel();
 		tabbedPane.addTab("Bloki", null, BlokTab, null);
 		BlokTab.setLayout(null);
@@ -879,54 +969,22 @@ public class Main extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 
-					// int id = idBtextField.getText();
-					// if(idBtextField.getText().equals("ID")){
-					// id= "";
-					// }
-
-					String ulicaNr = ulicaNrBTextField.getText();
-					if (nrTelWTextField.getText().equals("Numer")) {
-						ulicaNr = "";
-					}
-
-					String ulica = ulicaBTextField.getText();
-					if (ulicaBTextField.getText().equals("Ulica")) {
-						ulica = "";
-					}
-
-					String miejscowosc = miejscowoscWTextField.getText();
-					if (miejscowoscWTextField.getText().equals("Miejscowoœæ")) {
-						miejscowosc = "";
-					}
-
 					List<Blok> listaBlokow = null;
-
-					// System.err.println(blokDao.getAllBlok());
-					// wywolaj DAO i pobierz szukane bloki
-
-					// listaBlokow = wlascicielDao.szukajWlasciciel(nazwisko,
-					// imie, ulica, miejscowosc, pesel, nrTel);
-					// listaBlokow = blokDao.szukajBlok(ulica, ulicaNr,
-					// miejscowosc); //BLAD!!!
-					System.err.println("1");
-					Blok ttt = new Blok("Kaz", "2", "Krakow", "Stonka");
-					listaBlokow.add(ttt);
-					// listaBlokow = blokDao.getAllBlok();
-					System.err.println("2");
+					
 					System.out.println(listaBlokow);
-
-					// //wyswietl liste
-					// for(Blok temp: listaBlokow){
-					// System.out.println(temp);
-					// System.err.println("lista");
-					// }
-					//
-					// //stworz model i odswiez tabele, wyswietl liste
-					// BlokModelTabeli blokModel = new
-					// BlokModelTabeli(listaBlokow);
-					//
-					// tableB.setModel(blokModel);
-
+					
+//					Blok ttt = new Blok(1,"Kaz", "2", "Krakow", "Stonka");
+//					
+//					
+//					System.out.println(ttt);
+//					
+					
+					listaBlokow = blokDao.getAllBlok();
+					System.out.println(listaBlokow);
+					
+//					listaBlokow.add(ttt);
+					
+					
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(Main.this, "Error: " + e, "Error", JOptionPane.ERROR_MESSAGE);
 					System.err.println("B³¹d przy wyszukiwaniu: ");
@@ -1042,56 +1100,7 @@ public class Main extends JFrame {
 		// });
 		btnUsunB.setBounds(1081, 172, 89, 23);
 		BlokTab.add(btnUsunB);
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////// Koniec BLOK TAB
-
+		
 	}
 
-	public void odswierzListePracownikow() {
-
-		try {
-			List<Pracownik> pracownicy = pracownikDao.getAllPracownik();
-
-			// stworz model i odswierz tabele
-			PracownikModelTabeli model = new PracownikModelTabeli(pracownicy);
-
-			table.setModel(model);
-
-		} catch (Exception exc) {
-			JOptionPane.showMessageDialog(this, "BLAD: " + exc, "BLAD", JOptionPane.ERROR_MESSAGE);
-		}
-
-	}
-
-	public void odswierzListeWlascicieli() {
-
-		try {
-			List<Wlasciciel> wlasciciele = wlascicielDao.getAllWlasciciel();
-
-			// stworz model i odswierz tabele
-			WlascicielModelTabeli model = new WlascicielModelTabeli(wlasciciele);
-
-			tableW.setModel(model);
-
-		} catch (Exception exc) {
-			JOptionPane.showMessageDialog(this, "BLAD: " + exc, "BLAD", JOptionPane.ERROR_MESSAGE);
-		}
-
-	}
-
-	public void odswierzListeBlokow() {
-
-		try {
-			List<Blok> bloki = blokDao.getAllBlok();
-
-			// stworz model i odswierz tabele
-			BlokModelTabeli model = new BlokModelTabeli(bloki);
-
-			tableB.setModel(model);
-
-		} catch (Exception exc) {
-			JOptionPane.showMessageDialog(this, "BLAD: " + exc, "BLAD", JOptionPane.ERROR_MESSAGE);
-		}
-
-	}
 }

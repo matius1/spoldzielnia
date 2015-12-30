@@ -54,10 +54,10 @@ public class BlokDAO {
 
 		BlokDAO dao = new BlokDAO();
 		System.out.println(dao.getAllBlok());
-		System.out.println(dao.szukajAll());
-		Blok ttt = new Blok("Kaz", "2", "Krakow", "Stonka");
-		System.out.println("TEST: " +ttt);
-		System.out.println("ALL: " + dao.szukajBlok("", "", ""));
+//		System.out.println(dao.szukajAll());
+//		Blok ttt = new Blok("Kaz", "2", "Krakow", "Stonka");
+//		System.out.println("TEST: " +ttt.getClass());
+//		System.out.println("ALL: " + dao.szukajBlok("", "", ""));
 		
 		
 		
